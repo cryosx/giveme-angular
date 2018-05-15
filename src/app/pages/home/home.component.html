@@ -1,0 +1,74 @@
+<!-- <agm-map [(latitude)]="lat" [(longitude)]="lng" [(zoom)]="zoom" [(gestureHandling)]="gestureHandling" (styles)="styles" (centerChange)="onChooseLocation($event)">
+  <agm-marker [(latitude)]="lat" [(longitude)]="lng"></agm-marker>
+</agm-map> -->
+
+<div class="container">
+
+  <div style="text-align:center">
+    <h1>
+      <span class="label label-success">Google Maps in Angular 5</span>
+    </h1>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-md-3 col-sm-12 col-xs-12">
+      <button (click)="setMapType('terrain')" class="btn btn-primary">Terrain</button>
+      <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
+      <button (click)="setMapType('roadmap')" class="btn btn-warning">Road Map</button>
+    </div>
+    <div class="col-md-5 col-sm-12 col-xs-12">
+      <form class="form-inline" #form="ngForm">
+        <div class="form-group">
+          <input type="text" class="form-control" name="latitude" [(ngModel)]="latitude" placeholder="Enter latitude" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="longitude" [(ngModel)]="longitude" placeholder="Enter longitude" required>
+        </div>
+        <button type="button" (click)="setCenter()" class="btn btn-primary" [disabled]="form.invalid"> Go</button>
+
+
+      </form>
+    </div>
+
+    <div class="col-md-4 col-sm-12 col-xs-12">
+      <label>Select Marker: </label>
+      <select [(ngModel)]="selectedMarkerType" name="category">
+        <option *ngFor="let marker of markerTypes" [value]="marker.value">{{marker.text}}</option>
+      </select>
+      <button type="button" (click)="showCustomMarker()" class="btn btn-primary" [disabled]="form.invalid"> Custom Marker</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center">
+        <h3>
+          <div #gmap style="width:100%;height:400px"></div>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="row">
+      <h3>
+        <span class="label label-primary">Balram Chavan </span>
+      </h3>
+      <div class="row">
+        <div class="col-md-1">
+          <h4>
+            <a href="https://www.linkedin.com/in/balram-chavan-957511116/" target="_blank">LinkedIn</a>
+          </h4>
+        </div>
+        <div class="col-md-1">
+          <h4>
+            <a href="https://github.com/ultrasonicsoft" target="_blank">GitHub</a>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+{{lat}} {{lng}} {{zoom}} {{coords | json}}
