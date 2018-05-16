@@ -4,10 +4,6 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, FormControl } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { MatFormFieldModule } from '@angular/material/form-field';
-
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -19,7 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeService } from './services/home.service';
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
-
+import { UserSerivce } from './services/user.service';
 
 import { LayoutModule } from '@angular/cdk/layout';
 
@@ -36,8 +32,6 @@ import { LayoutModule } from '@angular/cdk/layout';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
     RouterModule.forRoot(
       [
         // { path: 'about', component: AboutComponent, pathMatch: 'full' },
@@ -50,7 +44,7 @@ import { LayoutModule } from '@angular/cdk/layout';
       { enableTracing: false }),
     LayoutModule
   ],
-  providers: [HomeService, LoginService, RegisterService],
+  providers: [HomeService, LoginService, RegisterService, UserSerivce],
   bootstrap: [AppComponent]
 })
 export class AppModule {
