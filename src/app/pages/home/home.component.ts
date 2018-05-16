@@ -18,9 +18,8 @@ export class HomeComponent implements OnInit {
   longitude: any;
 
   coords: Object;
-  markers: google.maps.Marker[];
 
-  iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+  markers: google.maps.Marker[];
 
   constructor(private homeService: HomeService) {
     this.markers = [];
@@ -41,21 +40,11 @@ export class HomeComponent implements OnInit {
 
     // });
 
-
-    const marker = new google.maps.Marker({
-      position: new google.maps.LatLng(21.3086887, -157.8106461),
-      draggable: true,
-      animation: google.maps.Animation.DROP,
-      title: 'Manoa Innovation Center!'
-    });
-
-    this.markers.push(marker);
-    // To add the marker to the map, call setMap();
-    marker.setMap(this.map);
-
     this.getTasks();
 
     this.map.addListener('click', (event) => {
+      this.addMarker(event);
+
       const { latLng } = event;
       const marker = new google.maps.Marker({
         position: new google.maps.LatLng(latLng.lat(), latLng.lng()),
@@ -69,7 +58,6 @@ export class HomeComponent implements OnInit {
     });
 
   }
-
 
   addMarker(event) {
     const { latLng } = event;
