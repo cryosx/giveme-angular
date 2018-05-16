@@ -1,0 +1,11 @@
+<div>
+
+  <form>
+    <input type="text" name="title" id="new_task_title" placeholder="Title: ">
+    <input type="date" name="expires" id="new_task_expires" placeholder="Expires: ">
+    <textarea name="description" id="new_task_description" placeholder="Description: " cols="30" rows="10"></textarea>
+    <input type="number" name="reward" id="new_task_reward" placeholder="Reward: " value="0.00">
+    <button (click)="addTask($event)">Submit</button>
+  </form>
+
+</div>
