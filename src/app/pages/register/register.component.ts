@@ -27,6 +27,7 @@ export class RegisterComponent {
       .toPromise()
       .then(data => {
         console.log(data);
+        localStorage.setItem('user', JSON.stringify(data));
       })
       .catch(err => {
         console.log(err);
