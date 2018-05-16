@@ -2,36 +2,57 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormControl } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AgmCoreModule } from '@agm/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+
+import { HeaderComponent } from './components/header/header.component';
+
+import { HomeService } from './services/home.service';
+import { LoginService } from './services/login.service';
+import { RegisterService } from './services/register.service';
+
+
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAiZ34AYc_-ZoJW2FDhczdX96tvGAs7Ch0'
-    }),
+    BrowserAnimationsModule,
+    MatFormFieldModule,
     RouterModule.forRoot(
       [
         // { path: 'about', component: AboutComponent, pathMatch: 'full' },
         // { path: 'contact', component: ContactComponent, pathMatch: 'full' },
+        { path: 'login', component: LoginComponent, pathMatch: 'full' },
+        { path: 'register', component: RegisterComponent, pathMatch: 'full' },
         { path: '', component: HomeComponent },
         { path: '**', redirectTo: '', pathMatch: 'full' }
       ],
-      { enableTracing: false })
+      { enableTracing: false }),
+    LayoutModule
   ],
-  providers: [],
+  providers: [HomeService, LoginService, RegisterService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

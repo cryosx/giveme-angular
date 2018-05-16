@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HomeService } from '../../services/home.service';
 import { ViewChild } from '@angular/core';
+import { fromEvent, Observable } from 'rxjs';
+
 import { } from '@types/googlemaps';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;
@@ -14,79 +17,96 @@ export class HomeComponent {
   latitude: any;
   longitude: any;
 
+  coords: Object;
+  markers: google.maps.Marker[];
+
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 
-  markerTypes = [
-    {
-      text: 'Parking', value: 'parking_lot_maps.png'
-    }
-    // ,
-    // {
-    //   text: "Library", value: "library_maps.png"
-    // },
-    // {
-    //   text: "Information", value: "info-i_maps.png"
-    // }
-  ];
-
-  selectedMarkerType = 'parking_lot_maps.png';
+  constructor(private homeService: HomeService) {
+    this.markers = [];
+  }
 
   ngOnInit() {
-    var mapProp = {
-      center: new google.maps.LatLng(18.5793, 73.8143),
+    const mapOptions = {
+      center: new google.maps.LatLng(21.3086887, -157.8106461),
       zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      // gestureHandling: 'cooperative',
     };
-    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
-  }
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapOptions);
 
-  setMapType(mapTypeId: string) {
-    this.map.setMapTypeId(mapTypeId)
-  }
+    // this.map.addListener('center_changed', (event) => {
 
-  setCenter() {
-    this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
+    //   console.log(event.lat());
 
-    const location = new google.maps.LatLng(this.latitude, this.longitude);
+    // });
+
 
     const marker = new google.maps.Marker({
-      position: location,
-      map: this.map,
-      title: 'Got you!'
+      position: new google.maps.LatLng(21.3086887, -157.8106461),
+      draggable: true,
+      animation: google.maps.Animation.DROP,
+      title: 'Manoa Innovation Center!'
     });
 
-    marker.addListener('click', this.simpleMarkerHandler);
+    this.markers.push(marker);
+    // To add the marker to the map, call setMap();
+    marker.setMap(this.map);
 
-    marker.addListener('click', () => {
-      this.markerHandler(marker);
-    });
-  }
+    this.getTasks();
 
-  simpleMarkerHandler() {
-    alert('Simple Component\'s function...');
-  }
-
-  markerHandler(marker: google.maps.Marker) {
-    alert('Marker\'s Title: ' + marker.getTitle());
-  }
-
-  showCustomMarker() {
-
-
-    this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
-
-    const location = new google.maps.LatLng(this.latitude, this.longitude);
-
-    console.log(`selected marker: ${this.selectedMarkerType}`);
-
-    const marker = new google.maps.Marker({
-      position: location,
-      map: this.map,
-      icon: this.iconBase + this.selectedMarkerType,
-      title: 'Got you!'
+    this.map.addListener('click', (event) => {
+      const { latLng } = event;
+      const marker = new google.maps.Marker({
+        position: new google.maps.LatLng(latLng.lat(), latLng.lng()),
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+      });
+      this.markers.push(marker);
+      console.log(this.markers);
+      // To add the marker to the map, call setMap();
+      marker.setMap(this.map);
     });
 
   }
+
+
+  addMarker(event) {
+    const { latLng } = event;
+    // const marker = new google.maps.Marker({
+    //   position: new google.maps.LatLng(latLng.lat(), latLng.lng()),
+    //   draggable: true,
+    //   animation: google.maps.Animation.DROP,
+    // });
+    // console.log(this.markers);
+    // // To add the marker to the map, call setMap();
+    // marker.setMap(this.map);
+  }
+
+  getTasks() {
+    this.homeService.getTasks()
+      .toPromise()
+      .then(data => {
+        console.log(data);
+        console.log(this.map);
+        Object.values(data).forEach(tasks => {
+          const { lat, lng } = tasks.location;
+          console.log(lat, lng);
+          const marker = new google.maps.Marker({
+            position: new google.maps.LatLng(21.3, -157.8),
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+          });
+
+          this.markers.push(marker);
+          // To add the marker to the map, call setMap();
+          marker.setMap(this.map);
+        });
+
+      })
+      .catch(err => { console.log(err); });
+  }
+
 }
 
 
