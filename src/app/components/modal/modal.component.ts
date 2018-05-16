@@ -7,5 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
+  taskData: Object;
+  constructor() {
+    this.taskData = {
+      title: '',
+      description: '',
+      reward: 0,
+      location: {},
+      expires_at: null
+    };
+  }
+
+  addTask(event) {
+    console.log(event);
+  }
 
 }
