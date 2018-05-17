@@ -3,5 +3,5 @@
 </agm-map> -->
 
 <div #gmap id="gmap" (click)="addMarker($event)"></div>
-
-{{lat}} {{lng}} {{zoom}} {{coords | json}}
+<app-modal [location]="location"></app-modal>
+<!-- {{location | json}} -->

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../services/home.service';
 import { ViewChild } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
+
+import { HomeService } from '../../services/home.service';
+import { TaskSerivce } from '../../services/task.service';
+
 
 import { } from '@types/googlemaps';
 
@@ -14,15 +17,13 @@ export class HomeComponent implements OnInit {
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;
 
-  latitude: any;
-  longitude: any;
-
-  coords: Object;
+  location: Object;
 
   markers: google.maps.Marker[];
 
-  constructor(private homeService: HomeService) {
+  constructor(private homeService: HomeService, private taskService: TaskSerivce) {
     this.markers = [];
+    this.location = { lat: 0, lng: 0 };
   }
 
   ngOnInit() {
@@ -34,18 +35,13 @@ export class HomeComponent implements OnInit {
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapOptions);
 
-    // this.map.addListener('center_changed', (event) => {
-
-    //   console.log(event.lat());
-
-    // });
-
     this.getTasks();
 
     this.map.addListener('click', (event) => {
-      this.addMarker(event);
-
+      // this.addMarker(event);
       const { latLng } = event;
+      this.location = { lat: latLng.lat(), lng: latLng.lng() };
+      console.log(this.location);
       const marker = new google.maps.Marker({
         position: new google.maps.LatLng(latLng.lat(), latLng.lng()),
         draggable: true,
@@ -72,16 +68,16 @@ export class HomeComponent implements OnInit {
   }
 
   getTasks() {
-    this.homeService.getTasks()
+    this.taskService.getTasks()
       .toPromise()
-      .then(data => {
-        console.log(data);
+      .then(tasks => {
+        console.log(tasks);
         console.log(this.map);
-        Object.values(data).forEach(tasks => {
-          const { lat, lng } = tasks.location;
+        Object.values(tasks).forEach(task => {
+          const { lat, lng } = task.location;
           console.log(lat, lng);
           const marker = new google.maps.Marker({
-            position: new google.maps.LatLng(21.3, -157.8),
+            position: new google.maps.LatLng(lat, lng),
             draggable: true,
             animation: google.maps.Animation.DROP,
           });

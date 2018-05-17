@@ -1,11 +1,12 @@
 <div>
 
   <form>
-    <input type="text" name="title" id="new_task_title" placeholder="Title: " [(ngModel)]="">
-    <input type="date" name="expires" id="new_task_expires" placeholder="Expires: ">
-    <textarea name="description" id="new_task_description" placeholder="Description: " cols="30" rows="10"></textarea>
-    <input type="number" name="reward" id="new_task_reward" placeholder="Reward: " value="0.00">
+    <input type="text" name="title" id="new_task_title" placeholder="Title: " [(ngModel)]="taskData.title">
+    <input type="date" name="expires" id="new_task_expires" placeholder="Expires: " [(ngModel)]="taskData.expires_at" (ngModelChange)="taskData.expires_at = $event">
+    <textarea name="description" id="new_task_description" placeholder="Description: " cols="30" rows="10" [(ngModel)]="taskData.description"></textarea>
+    <input type="number" name="reward" id="new_task_reward" placeholder="Reward: " [(ngModel)]="taskData.reward">
     <button (click)="addTask($event)">Submit</button>
   </form>
+  {{taskData | json}}
 
 </div>
