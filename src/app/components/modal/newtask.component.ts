@@ -6,11 +6,11 @@ import * as moment from 'moment';
 import {} from '../../services/task.service';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+  selector: 'app-newtask-modal',
+  templateUrl: './newtask.component.html',
+  styleUrls: ['./newtask.component.scss']
 })
-export class ModalComponent implements OnInit {
+export class NewTaskComponent implements OnInit {
   taskData: Object;
   @Input() location: Object;
   @Output() addNewTask: EventEmitter<any>;

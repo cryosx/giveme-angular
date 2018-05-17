@@ -3,6 +3,6 @@
 </agm-map> -->
 
 <div #gmap id="gmap" (click)="{}"></div>
-<app-modal *ngIf="getShowModal() && userService.getIsLoggedIn()" (renderTasks)="getTasks()" (toggleModal)="toggleModal()"
-  [location]="location"></app-modal>
+<app-newtask-modal *ngIf="getShowModal() && userService.getIsLoggedIn()" (renderTasks)="getTasks()" (toggleModal)="toggleModal()"
+  [location]="location"></app-newtask-modal>
 <!-- {{location | json}} -->

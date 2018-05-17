@@ -12,7 +12,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 import { HeaderComponent } from './components/header/header.component';
-import { ModalComponent } from './components/modal/modal.component';
+import { NewTaskComponent } from './components/modal/newtask.component';
 
 import { HomeService } from './services/home.service';
 import { AuthenticateService } from './services/authenticate.service';
@@ -28,7 +28,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
-    ModalComponent
+    NewTaskComponent
   ],
   imports: [
     CommonModule,
