@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
-import { LoginService } from '../../services/login.service';
+import { AuthenticateService } from '../../services/authenticate.service';
+import { UserSerivce } from '../../services/user.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { LoginService } from '../../services/login.service';
 export class LoginComponent {
   loginData: Object;
 
-  constructor(private loginService: LoginService) {
+  constructor(private user: UserSerivce, private router: Router) {
     this.loginData = {
       email: '',
       password: ''
@@ -22,16 +22,10 @@ export class LoginComponent {
   login(event) {
     console.log(event);
     console.log(this.loginData);
-    this.loginService.login(this.loginData)
-      .toPromise()
-      .then(data => {
-        console.log(data);
-        localStorage.setItem('user', JSON.stringify(data));
+    this.user.login(this.loginData);
+    // this.user.getIsLoggedIn();
+    return this.router.navigateByUrl('/');
 
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }
 }
 

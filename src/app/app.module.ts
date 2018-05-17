@@ -11,11 +11,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 import { HeaderComponent } from './components/header/header.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 import { HomeService } from './services/home.service';
-import { LoginService } from './services/login.service';
-import { RegisterService } from './services/register.service';
+import { AuthenticateService } from './services/authenticate.service';
 import { UserSerivce } from './services/user.service';
+import { TaskSerivce } from './services/task.service';
+
 
 import { LayoutModule } from '@angular/cdk/layout';
 
@@ -25,7 +27,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    HeaderComponent
+    HeaderComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +47,7 @@ import { LayoutModule } from '@angular/cdk/layout';
       { enableTracing: false }),
     LayoutModule
   ],
-  providers: [HomeService, LoginService, RegisterService, UserSerivce],
+  providers: [HomeService, AuthenticateService, UserSerivce, TaskSerivce],
   bootstrap: [AppComponent]
 })
 export class AppModule {

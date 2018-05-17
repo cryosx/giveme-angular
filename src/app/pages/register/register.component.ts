@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { RegisterService } from '../../services/register.service';
+import { AuthenticateService } from '../../services/authenticate.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { RegisterService } from '../../services/register.service';
 export class RegisterComponent {
   registerData: Object;
 
-  constructor(private registerService: RegisterService) {
+  constructor(private authService: AuthenticateService) {
     this.registerData = {
       username: '',
       email: '',
@@ -23,15 +23,8 @@ export class RegisterComponent {
   register(event) {
     console.log(event);
     console.log(this.registerData);
-    this.registerService.register(this.registerData)
-      .toPromise()
-      .then(data => {
-        console.log(data);
-        localStorage.setItem('user', JSON.stringify(data));
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.authService.register(this.registerData);
+
   }
 
 }

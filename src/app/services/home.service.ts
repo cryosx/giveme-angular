@@ -10,9 +10,5 @@ export class HomeService {
   // submitInquiry(data) {
   //   return this.http.post('http://localhost:3000', data);
   // }
-  getTasks() {
-    // return this.http.get('http://localhost:3000/api/task');
-    return this.http.get('/api/task');
 
-  }
 }
