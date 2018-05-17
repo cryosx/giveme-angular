@@ -2,6 +2,7 @@
   <agm-marker [(latitude)]="lat" [(longitude)]="lng"></agm-marker>
 </agm-map> -->
 
-<div #gmap id="gmap" (click)="addMarker($event)"></div>
-<app-modal [location]="location"></app-modal>
+<div #gmap id="gmap" (click)="{}"></div>
+<app-modal *ngIf="getShowModal() && userService.getIsLoggedIn()" (renderTasks)="getTasks()" (toggleModal)="toggleModal()"
+  [location]="location"></app-modal>
 <!-- {{location | json}} -->
