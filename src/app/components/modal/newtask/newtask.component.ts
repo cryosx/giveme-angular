@@ -49,8 +49,8 @@ export class NewTaskComponent implements OnInit {
       .then(task => {
         console.log(task);
         // this.addNewTask.emit(task);
-        this.toggleNewTaskModal.emit();
         this.renderTasks.emit();
+        this.toggleNewTaskModal.emit();
       })
       .catch(err => {
         console.log(err);
