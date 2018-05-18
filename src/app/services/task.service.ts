@@ -18,4 +18,8 @@ export class TaskSerivce {
   addTask(taskData) {
     return this.http.post('/api/task/new', taskData);
   }
+  acceptTask(id) {
+    // console.log(id);
+    return this.http.get(`/api/task/${id}/accept`);
+  }
 }

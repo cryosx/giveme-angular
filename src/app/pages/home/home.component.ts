@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import {
@@ -8,6 +8,7 @@ import {
   animate,
   style
 } from '@angular/animations';
+import * as moment from 'moment';
 
 import { HomeService } from '../../services/home.service';
 import { TaskSerivce } from '../../services/task.service';
@@ -36,17 +37,22 @@ export class HomeComponent implements OnInit {
   map: google.maps.Map;
   location: Object;
   tasks: Object;
+  taskData: Object;
 
-  showModal: boolean;
+  showTaskModal: boolean;
+  showNewTaskModal: boolean;
 
   constructor(
     private homeService: HomeService,
     private taskService: TaskSerivce,
-    private userService: UserSerivce
+    private userService: UserSerivce,
+    private changeDetect: ChangeDetectorRef
   ) {
     this.tasks = {};
     this.location = { lat: 0, lng: 0 };
-    this.showModal = false;
+    this.taskData = {};
+    this.showTaskModal = false;
+    this.showNewTaskModal = false;
   }
 
   ngOnInit() {
@@ -61,10 +67,11 @@ export class HomeComponent implements OnInit {
     this.getTasks();
 
     this.map.addListener('click', event => {
-      this.toggleModal();
       const { latLng } = event;
       this.location = { lat: latLng.lat(), lng: latLng.lng() };
+      this.toggleNewTaskModal();
 
+      // this.changeDetect.detectChanges();
       // const marker = new google.maps.Marker({
       //   position: new google.maps.LatLng(latLng.lat(), latLng.lng()),
       //   draggable: true,
@@ -91,12 +98,22 @@ export class HomeComponent implements OnInit {
   //   // marker.setMap(this.map);
   // }
 
-  getShowModal() {
-    return this.showModal;
+  getShowTaskModal() {
+    return this.showTaskModal;
   }
 
-  toggleModal() {
-    this.showModal = !this.showModal;
+  toggleTaskModal() {
+    this.showTaskModal = !this.showTaskModal;
+    return this.changeDetect.detectChanges();
+  }
+
+  getShowNewTaskModal() {
+    return this.showNewTaskModal;
+  }
+
+  toggleNewTaskModal() {
+    this.showNewTaskModal = !this.showNewTaskModal;
+    return this.changeDetect.detectChanges();
   }
 
   getTasks() {
@@ -118,7 +135,12 @@ export class HomeComponent implements OnInit {
               .getTask(marker['task_id'])
               .toPromise()
               .then(task => {
-                console.log('retrieve', task);
+                this.taskData = task;
+                this.taskData['expires_at'] = moment(
+                  this.taskData['expires_at']
+                ).format('YYYY-MM-DD');
+
+                this.toggleTaskModal();
               })
               .catch(err => {
                 console.log(err);
@@ -127,10 +149,8 @@ export class HomeComponent implements OnInit {
 
           this.tasks[task['id']] = task;
           this.tasks[task['id']]['marker'] = marker;
-          console.log(marker);
           marker.setMap(this.map);
         });
-        console.log(this.tasks);
       })
       .catch(err => {
         console.log(err);
@@ -140,5 +160,8 @@ export class HomeComponent implements OnInit {
     tasks.forEach(task => {
       task['marker'].setMap(null);
     });
+  }
+  log() {
+    console.log('click');
   }
 }

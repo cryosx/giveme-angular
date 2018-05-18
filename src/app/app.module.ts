@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { NgModule, ApplicationRef } from '@angular/core';
+import { NgModule, ApplicationRef, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, FormControl } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,7 +12,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 import { HeaderComponent } from './components/header/header.component';
-import { NewTaskComponent } from './components/modal/newtask.component';
+import { NewTaskComponent } from './components/modal/newtask/newtask.component';
+import { TaskComponent } from './components/modal/task/task.component';
 
 import { HomeService } from './services/home.service';
 import { AuthenticateService } from './services/authenticate.service';
@@ -28,7 +29,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
-    NewTaskComponent
+    NewTaskComponent,
+    TaskComponent
   ],
   imports: [
     CommonModule,

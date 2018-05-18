@@ -2,7 +2,8 @@
   <agm-marker [(latitude)]="lat" [(longitude)]="lng"></agm-marker>
 </agm-map> -->
 
-<div #gmap id="gmap" (click)="{}"></div>
-<app-newtask-modal *ngIf="getShowModal() && userService.getIsLoggedIn()" (renderTasks)="getTasks()" (toggleModal)="toggleModal()"
+<div #gmap id="gmap"></div>
+<app-newtask-modal *ngIf="getShowNewTaskModal() && userService.getIsLoggedIn()" (renderTasks)="getTasks()" (toggleNewTaskModal)="toggleNewTaskModal()"
   [location]="location"></app-newtask-modal>
+<app-task-modal *ngIf="getShowTaskModal() && userService.getIsLoggedIn()" (toggleTaskModal)="toggleTaskModal($event)" [taskData]='taskData'></app-task-modal>
 <!-- {{location | json}} -->
