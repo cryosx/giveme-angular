@@ -12,6 +12,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 import { HeaderComponent } from './components/header/header.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NewTaskComponent } from './components/modal/newtask/newtask.component';
 import { TaskComponent } from './components/modal/task/task.component';
 
@@ -21,6 +22,8 @@ import { UserSerivce } from './services/user.service';
 import { TaskSerivce } from './services/task.service';
 
 import { LayoutModule } from '@angular/cdk/layout';
+import { AddTaskComponent } from './components/task/add-task/add-task.component';
+import { ShowTaskComponent } from './components/task/show-task/show-task.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +32,11 @@ import { LayoutModule } from '@angular/cdk/layout';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
+    SidebarComponent,
     NewTaskComponent,
-    TaskComponent
+    TaskComponent,
+    AddTaskComponent,
+    ShowTaskComponent
   ],
   imports: [
     CommonModule,
@@ -42,8 +48,18 @@ import { LayoutModule } from '@angular/cdk/layout';
       [
         // { path: 'about', component: AboutComponent, pathMatch: 'full' },
         // { path: 'contact', component: ContactComponent, pathMatch: 'full' },
-        { path: 'login', component: LoginComponent, pathMatch: 'full' },
-        { path: 'register', component: RegisterComponent, pathMatch: 'full' },
+        {
+          path: 'login',
+          component: LoginComponent,
+          pathMatch: 'full',
+          canActivate: [UserSerivce]
+        },
+        {
+          path: 'register',
+          component: RegisterComponent,
+          pathMatch: 'full',
+          canActivate: [UserSerivce]
+        },
         { path: '', component: HomeComponent },
         { path: '**', redirectTo: '', pathMatch: 'full' }
       ],
