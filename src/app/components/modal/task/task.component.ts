@@ -46,7 +46,7 @@ export class TaskComponent implements OnInit {
       .toPromise()
       .then(task => {
         console.log(task);
-        // this.acceptTaskEvent.emit(task);
+        this.renderTasks.emit();
         this.toggleTaskModal.emit();
       })
       .catch(err => {
