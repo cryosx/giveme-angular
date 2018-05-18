@@ -1,9 +1,21 @@
 <!-- <agm-map [(latitude)]="lat" [(longitude)]="lng" [(zoom)]="zoom" [(gestureHandling)]="gestureHandling" (styles)="styles" (centerChange)="onChooseLocation($event)">
   <agm-marker [(latitude)]="lat" [(longitude)]="lng"></agm-marker>
 </agm-map> -->
+<div id="home">
+  <app-sidebar></app-sidebar>
+  <div #gmap id="gmap"></div>
+</div>
 
-<div #gmap id="gmap"></div>
 <app-newtask-modal *ngIf="getShowNewTaskModal() && userService.getIsLoggedIn()" (renderTasks)="getTasks()" (toggleNewTaskModal)="toggleNewTaskModal()"
-  [location]="location"></app-newtask-modal>
+  [location]="location">
+  <!-- <form>
+      <button (click)="toggleNewTaskModal.emit()">X</button>
+      <input type="text" name="title" id="new_task_title" placeholder="Title: " [(ngModel)]="taskData.title">
+      <input type="date" name="expires" id="new_task_expires" placeholder="Expires: " [value]="taskData.expires_at">
+      <textarea name="description" id="new_task_description" placeholder="Description: " cols="30" rows="10" [(ngModel)]="taskData.description"></textarea>
+      <input type="number" name="reward" id="new_task_reward" placeholder="Reward: " [(ngModel)]="taskData.reward">
+      <button (click)="addTask($event)">Submit</button>
+    </form> -->
+</app-newtask-modal>
 <app-task-modal *ngIf="getShowTaskModal() && userService.getIsLoggedIn()" (toggleTaskModal)="toggleTaskModal($event)" [taskData]='taskData'></app-task-modal>
 <!-- {{location | json}} -->
