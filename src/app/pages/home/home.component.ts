@@ -59,8 +59,13 @@ export class HomeComponent implements OnInit {
     const mapOptions = {
       center: new google.maps.LatLng(21.3086887, -157.8106461),
       zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-      // gestureHandling: 'cooperative',
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoomControl: true,
+      mapTypeControl: false,
+      scaleControl: true,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: false
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapOptions);
 
@@ -70,33 +75,8 @@ export class HomeComponent implements OnInit {
       const { latLng } = event;
       this.location = { lat: latLng.lat(), lng: latLng.lng() };
       this.toggleNewTaskModal();
-
-      // this.changeDetect.detectChanges();
-      // const marker = new google.maps.Marker({
-      //   position: new google.maps.LatLng(latLng.lat(), latLng.lng()),
-      //   draggable: true,
-      //   animation: google.maps.Animation.DROP
-      // });
-      // marker.addListener('click', () => {
-      //   console.log('marker', marker);
-      // });
-      // marker.setMap(this.map);
-
-      // this.showModal = true;
     });
   }
-
-  // addMarker(event) {
-  //   const { latLng } = event;
-  //   // const marker = new google.maps.Marker({
-  //   //   position: new google.maps.LatLng(latLng.lat(), latLng.lng()),
-  //   //   draggable: true,
-  //   //   animation: google.maps.Animation.DROP,
-  //   // });
-  //   // console.log(this.markers);
-  //   // // To add the marker to the map, call setMap();
-  //   // marker.setMap(this.map);
-  // }
 
   getShowTaskModal() {
     return this.showTaskModal;
@@ -117,6 +97,7 @@ export class HomeComponent implements OnInit {
   }
 
   getTasks() {
+    console.log('GETTASK');
     this.taskService
       .getTasks()
       .toPromise()
