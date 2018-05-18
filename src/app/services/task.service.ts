@@ -7,6 +7,10 @@ import { HttpClient } from '@angular/common/http';
 export class TaskSerivce {
   constructor(private http: HttpClient) {}
 
+  getUserTasks(id) {
+    return this.http.get(`/api/user/${id}`);
+  }
+
   getTask(id) {
     return this.http.get(`/api/task/${id}`);
   }
