@@ -18,4 +18,5 @@
     </form> -->
 </app-newtask-modal>
 <app-task-modal *ngIf="getShowTaskModal() && userService.getIsLoggedIn()" (toggleTaskModal)="toggleTaskModal($event)" [taskData]='taskData'></app-task-modal>
+<app-user-tasks></app-user-tasks>
 <!-- {{location | json}} -->
