@@ -24,6 +24,7 @@ import { TaskSerivce } from './services/task.service';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AddTaskComponent } from './components/task/add-task/add-task.component';
 import { ShowTaskComponent } from './components/task/show-task/show-task.component';
+import { UserTasksComponent } from './components/task/user-tasks/user-tasks.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ShowTaskComponent } from './components/task/show-task/show-task.compone
     NewTaskComponent,
     TaskComponent,
     AddTaskComponent,
-    ShowTaskComponent
+    ShowTaskComponent,
+    UserTasksComponent
   ],
   imports: [
     CommonModule,
