@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { TaskSerivce } from '../../services/task.service';
+import { TaskSerivce } from '../../../services/task.service';
 
 import * as moment from 'moment';
 
@@ -14,7 +14,7 @@ export class NewTaskComponent implements OnInit {
   taskData: Object;
   @Input() location: Object;
   @Output() addNewTask: EventEmitter<any>;
-  @Output() toggleModal: EventEmitter<any>;
+  @Output() toggleNewTaskModal: EventEmitter<any>;
   @Output() renderTasks: EventEmitter<any>;
 
   constructor(private taskService: TaskSerivce) {
@@ -26,7 +26,7 @@ export class NewTaskComponent implements OnInit {
       expires_at: null
     };
     this.addNewTask = new EventEmitter<any>();
-    this.toggleModal = new EventEmitter<any>();
+    this.toggleNewTaskModal = new EventEmitter<any>();
     this.renderTasks = new EventEmitter<any>();
   }
 
@@ -49,7 +49,7 @@ export class NewTaskComponent implements OnInit {
       .then(task => {
         console.log(task);
         // this.addNewTask.emit(task);
-        this.toggleModal.emit();
+        this.toggleNewTaskModal.emit();
         this.renderTasks.emit();
       })
       .catch(err => {

@@ -1,7 +1,7 @@
 <div>
-  <div id="modal_background" (click)="toggleModal.emit()"></div>
+  <div id="newtask_background" (click)="toggleNewTaskModal.emit()"></div>
   <form>
-    <button (click)="toggleModal.emit()">X</button>
+    <button (click)="toggleNewTaskModal.emit()">X</button>
 
     <input type="text" name="title" id="new_task_title" placeholder="Title: " [(ngModel)]="taskData.title">
     <input type="date" name="expires" id="new_task_expires" placeholder="Expires: " [value]="taskData.expires_at">

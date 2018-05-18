@@ -1,0 +1,12 @@
+<div>
+  <div id="task_background" (click)="toggleTaskModal.emit('test')"></div>
+  <form>
+    <button (click)="toggleTaskModal.emit()">X</button>
+    <!-- <label for="title"></label> -->
+    <input disabled type="text" name="title" id="task_title" placeholder="Title: " [(ngModel)]="taskData.title">
+    <input disabled type="date" name="expires" id="task_expires" placeholder="Expires: " [value]="taskData.expires_at">
+    <textarea disabled name="description" id="task_description" placeholder="Description: " cols="30" rows="10" [(ngModel)]="taskData.description"></textarea>
+    <input disabled type="text" name="reward" id="task_reward" placeholder="Reward: " [(ngModel)]="taskData.reward">
+    <button (click)="acceptTask()">Accept</button>
+  </form>
+</div>
