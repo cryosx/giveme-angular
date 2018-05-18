@@ -2,8 +2,8 @@
   <nav>
     <a routerLink="/" routerLinkActive="active">Home</a>
     <a href="https://angular.io/docs" routerLinkActive="active">Docs</a>
-    <a routerLink="login" routerLinkActive="active">Login</a>
-    <a routerLink="register" routerLinkActive="active">Register</a>
+    <a *ngIf="!isLoggedIn()" routerLink="login" routerLinkActive="active">Login</a>
+    <a *ngIf="!isLoggedIn()" routerLink="register" routerLinkActive="active">Register</a>
     <a *ngIf="isLoggedIn()" (click)="logout()">Logout</a>
   </nav>
 </header>
