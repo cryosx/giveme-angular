@@ -4,7 +4,7 @@
     <img src="/assets/home-icon.svg" alt="home">
     <span>Home</span>
   </a>
-  <a routerLink="/" routerLinkActive="active" id="sidebar_mytasks">
+  <a routerLink="/" routerLinkActive="active" id="sidebar_mytasks" (click)="openTaskComponent.emit()">
     <img src="/assets/task-icon.svg" alt="mytasks">
     <span>My Tasks</span>
   </a>
