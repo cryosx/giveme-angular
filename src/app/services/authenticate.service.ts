@@ -4,9 +4,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthenticateService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   // submitInquiry(data) {
   //   return this.http.post('http://localhost:3000', data);
   // }
@@ -21,13 +20,6 @@ export class AuthenticateService {
   register(data) {
     // return this.http.get('http://localhost:3000/api/task');
     console.log('register', data);
-    return this.http.post('/api/register', data).toPromise()
-      .then(user => {
-        console.log(user);
-        localStorage.setItem('user', JSON.stringify(user));
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    return this.http.post('/api/register', data);
   }
 }
