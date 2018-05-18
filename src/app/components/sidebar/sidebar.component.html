@@ -1,0 +1,29 @@
+<div id="sidebar">
+  <div id="sidebar_logo"></div>
+  <a routerLink="/" routerLinkActive="active" id="sidebar_home">
+    <img src="/assets/home-icon.svg" alt="home">
+    <span>Home</span>
+  </a>
+  <a routerLink="/" routerLinkActive="active" id="sidebar_mytasks">
+    <img src="/assets/task-icon.svg" alt="mytasks">
+    <span>My Tasks</span>
+  </a>
+
+  <div class="seperator"></div>
+
+  <div id="sidebar_auth">
+    <a *ngIf="isLoggedIn()" id="sidebar_logout" (click)="logout()">
+      <img src="/assets/logout-icon.svg" alt="logout">
+      <span id="logout">Logout</span>
+    </a>
+    <a *ngIf="!isLoggedIn()" id="sidebar_login" routerLink="login">
+      <!-- <img src="/assets/account-icon-2.svg" alt="login"> -->
+      <span id="login">Login</span>
+    </a>
+    <a *ngIf="!isLoggedIn()" id="sidebar_register" routerLink="register" routerLinkActive="active">
+      <!-- <img src="/assets/account-icon.svg" alt="register"> -->
+      <span id="login">Register</span>
+    </a>
+  </div>
+
+</div>
