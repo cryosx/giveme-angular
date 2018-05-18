@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
-import { AuthenticateService } from '../../services/authenticate.service';
-
+import { UserSerivce } from '../../services/user.service';
 
 @Component({
   templateUrl: './register.component.html',
@@ -12,7 +10,7 @@ import { AuthenticateService } from '../../services/authenticate.service';
 export class RegisterComponent {
   registerData: Object;
 
-  constructor(private authService: AuthenticateService) {
+  constructor(private user: UserSerivce, private router: Router) {
     this.registerData = {
       username: '',
       email: '',
@@ -23,8 +21,7 @@ export class RegisterComponent {
   register(event) {
     console.log(event);
     console.log(this.registerData);
-    this.authService.register(this.registerData);
-
+    this.user.register(this.registerData);
+    return this.router.navigateByUrl('/');
   }
-
 }
