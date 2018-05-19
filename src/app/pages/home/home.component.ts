@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
 
   showTaskModal: boolean;
   showNewTaskModal: boolean;
+  showTasksBar: boolean;
 
   constructor(
     private googleMapService: GoogleMapService,
@@ -62,6 +63,7 @@ export class HomeComponent implements OnInit {
     this.taskData = {};
     this.showTaskModal = false;
     this.showNewTaskModal = false;
+    this.showTasksBar = false;
   }
 
   ngOnInit() {
@@ -141,8 +143,12 @@ export class HomeComponent implements OnInit {
       task['marker'].setMap(null);
     });
   }
-  test(event) {
+  renderUserTasks(event) {
     console.log(event);
     this.userTask.getUserTasks();
+  }
+  toggleTasksBar(event) {
+    console.log(this);
+    this.userTask.toggleTasksBar();
   }
 }

@@ -13,6 +13,7 @@ export class UserTasksComponent implements OnInit {
   cookieUser: Object;
   sessionUser: Object;
   tasks: Object;
+  showTasksBar: boolean;
 
   constructor(
     private taskService: TaskSerivce,
@@ -21,6 +22,7 @@ export class UserTasksComponent implements OnInit {
   ) {
     this.cookieUser = {};
     this.sessionUser = {};
+    this.showTasksBar = false;
 
     this.tasks = { myTasks: [], activeTasks: [] };
   }
@@ -67,5 +69,10 @@ export class UserTasksComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  toggleTasksBar() {
+    console.log('toggle test');
+    this.showTasksBar = !this.showTasksBar;
   }
 }

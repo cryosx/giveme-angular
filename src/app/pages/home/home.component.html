@@ -2,7 +2,7 @@
   <agm-marker [(latitude)]="lat" [(longitude)]="lng"></agm-marker>
 </agm-map> -->
 <div id="home">
-  <app-sidebar></app-sidebar>
+  <app-sidebar (showTasksBar)="toggleTasksBar()"></app-sidebar>
   <div #gmap id="gmap"></div>
   <app-user-tasks></app-user-tasks>
 
@@ -19,6 +19,6 @@
       <button (click)="addTask($event)">Submit</button>
     </form> -->
 </app-newtask-modal>
-<app-task-modal *ngIf="getShowTaskModal() && userService.getIsLoggedIn()" (renderUserTasks)="test($event)" (toggleTaskModal)="toggleTaskModal($event)"
+<app-task-modal *ngIf="getShowTaskModal() && userService.getIsLoggedIn()" (renderUserTasks)="renderUserTasks($event)" (toggleTaskModal)="toggleTaskModal($event)"
   [taskData]='taskData'></app-task-modal>
 <!-- {{location | json}} -->

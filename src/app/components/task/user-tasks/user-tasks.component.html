@@ -5,7 +5,7 @@
 </ul> -->
 
 
-<div id="user_tasks_container">
+<div id="user_tasks_container" [ngClass]="{'show':showTasksBar, 'hide':!showTasksBar}">
 
   <span class="task_section_label">Active Tasks</span>
 
