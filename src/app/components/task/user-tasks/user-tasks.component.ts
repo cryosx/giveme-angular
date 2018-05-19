@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, ChangeDetectorRef } from '@angular/core';
 import { TaskSerivce } from '../../../services/task.service';
 import { UserSerivce } from '../../../services/user.service';
+
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-user-tasks',
@@ -10,18 +12,17 @@ import { UserSerivce } from '../../../services/user.service';
 export class UserTasksComponent implements OnInit {
   cookieUser: Object;
   sessionUser: Object;
-  userTasks: any;
-  userActiveTasks: any;
+  tasks: Object;
 
   constructor(
     private taskService: TaskSerivce,
-    private userService: UserSerivce
+    private userService: UserSerivce,
+    private changeDetector: ChangeDetectorRef
   ) {
     this.cookieUser = {};
     this.sessionUser = {};
 
-    this.userTasks = [];
-    this.userActiveTasks = [];
+    this.tasks = { myTasks: [], activeTasks: [] };
   }
 
   ngOnInit() {
@@ -29,6 +30,7 @@ export class UserTasksComponent implements OnInit {
   }
 
   getUserTasks() {
+    console.log('tst');
     this.cookieUser = this.userService.getUser();
     const id = this.cookieUser['id'];
     this.taskService
@@ -36,11 +38,34 @@ export class UserTasksComponent implements OnInit {
       .toPromise()
       .then(user => {
         this.sessionUser = user;
-        this.userTasks = user['myTasks'];
-        this.userActiveTasks = user['activeTasks'];
-        console.log(this.userTasks);
-        console.log(this.userActiveTasks);
+        this.tasks['myTasks'] = this.sessionUser['myTasks'];
+        this.tasks['activeTasks'] = this.sessionUser['activeTasks'];
+        this.changeDetector.detectChanges();
+        console.log(this.tasks);
       })
       .catch();
+  }
+  getExpiration(datetime) {
+    const time = moment(datetime)
+      .toNow(true)
+      .split(' ');
+    if (time[0].toLocaleLowerCase() === 'a') {
+      time[0] = '1';
+    }
+    return time;
+  }
+
+  leaveTask(event) {
+    const { taskId } = event.target.dataset;
+    this.taskService
+      .leaveTask(taskId)
+      .toPromise()
+      .then(data => {
+        console.log(data);
+        this.getUserTasks();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 }

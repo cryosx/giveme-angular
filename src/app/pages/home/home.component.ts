@@ -1,4 +1,11 @@
-import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  OnInit,
+  ChangeDetectorRef,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import {
   trigger,
@@ -8,6 +15,8 @@ import {
   style
 } from '@angular/animations';
 import * as moment from 'moment';
+
+import { UserTasksComponent } from '../../components/task/user-tasks/user-tasks.component';
 
 import { GoogleMapService } from '../../services/google-map.service';
 import { TaskSerivce } from '../../services/task.service';
@@ -32,6 +41,7 @@ import {} from '@types/googlemaps';
 })
 export class HomeComponent implements OnInit {
   @ViewChild('gmap') gmapElement: any;
+  @ViewChild(UserTasksComponent) private userTask: UserTasksComponent;
 
   map: google.maps.Map;
   location: Object;
@@ -130,5 +140,9 @@ export class HomeComponent implements OnInit {
     tasks.forEach(task => {
       task['marker'].setMap(null);
     });
+  }
+  test(event) {
+    console.log(event);
+    this.userTask.getUserTasks();
   }
 }

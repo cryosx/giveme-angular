@@ -26,4 +26,11 @@ export class TaskSerivce {
     // console.log(id);
     return this.http.get(`/api/task/${id}/accept`);
   }
+  leaveTask(id) {
+    return this.http.get(`/api/task/${id}/leave`);
+  }
+
+  //   leaveTask2(id) {
+  //     return this.http.get(`/api/${user_id}/task/${id}/leave`);
+  //   }
 }

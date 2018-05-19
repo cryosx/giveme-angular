@@ -4,6 +4,8 @@
 <div id="home">
   <app-sidebar></app-sidebar>
   <div #gmap id="gmap"></div>
+  <app-user-tasks></app-user-tasks>
+
 </div>
 
 <app-newtask-modal *ngIf="getShowNewTaskModal() && userService.getIsLoggedIn()" (renderTasks)="getTasks()" (toggleNewTaskModal)="toggleNewTaskModal()"
@@ -17,6 +19,6 @@
       <button (click)="addTask($event)">Submit</button>
     </form> -->
 </app-newtask-modal>
-<app-task-modal *ngIf="getShowTaskModal() && userService.getIsLoggedIn()" (toggleTaskModal)="toggleTaskModal($event)" [taskData]='taskData'></app-task-modal>
-<app-user-tasks></app-user-tasks>
+<app-task-modal *ngIf="getShowTaskModal() && userService.getIsLoggedIn()" (renderUserTasks)="test($event)" (toggleTaskModal)="toggleTaskModal($event)"
+  [taskData]='taskData'></app-task-modal>
 <!-- {{location | json}} -->

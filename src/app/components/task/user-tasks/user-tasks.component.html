@@ -1,3 +1,36 @@
-<p>
-  user-tasks works!
-</p>
+<!-- <ul>
+  <li *ngFor="let myTask of tasks.userTasks">
+    {{myTask | json}}
+  </li>
+</ul> -->
+
+
+<div id="user_tasks_container">
+  <div *ngFor="let activeTask of tasks.activeTasks" class="user_tasks_item" [attr.data-task-id]="activeTask.id" (click)="leaveTask($event)">
+
+    <div class="task_expiration_container" [attr.data-task-id]="activeTask.id">
+      <span class="task_expiration_time" [attr.data-task-id]="activeTask.id">{{getExpiration(activeTask.expires_at)[0]}}</span>
+      <span class="task_expiration_units" [attr.data-task-id]="activeTask.id">{{getExpiration(activeTask.expires_at)[1]}} left</span>
+    </div>
+    <div class="seperator" [attr.data-task-id]="activeTask.id"></div>
+    <div class="task_details" [attr.data-task-id]="activeTask.id">
+      <span class="task_title" [attr.data-task-id]="activeTask.id">{{activeTask.title}}</span>
+      <span class="task_reward" [attr.data-task-id]="activeTask.id">{{activeTask.reward}}</span>
+    </div>
+    <div class="task_category_color" [attr.data-task-id]="activeTask.id"></div>
+  </div>
+</div>
+
+<!-- {
+  "id": 27,
+  "title": "test2",
+  "description": "test2",
+  "location": { "lat": 21.295977674390066, "lng": -157.8230358910631 },
+  "reward": "$0.00",
+  "owner_id": 1,
+  "expires_at": "2018-05-19T10:00:00.000Z",
+  "completed_at": null,
+  "created_at": "2018-05-18T19:18:19.620Z",
+  "updated_at": "2018-05-18T19:18:19.620Z",
+  "_pivot_user_id": 1,
+  "_pivot_task_id": 27 } -->

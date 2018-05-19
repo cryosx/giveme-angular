@@ -12,7 +12,7 @@ import {} from '../../services/task.service';
 })
 export class TaskComponent implements OnInit {
   @Input() taskData: Object;
-  @Output() acceptTaskEvent: EventEmitter<any>;
+  @Output() renderUserTasks: EventEmitter<any>;
   @Output() toggleTaskModal: EventEmitter<any>;
   @Output() renderTasks: EventEmitter<any>;
 
@@ -24,7 +24,7 @@ export class TaskComponent implements OnInit {
       reward: 0,
       expires_at: null
     };
-    this.acceptTaskEvent = new EventEmitter<any>();
+    this.renderUserTasks = new EventEmitter<any>();
     this.toggleTaskModal = new EventEmitter<any>();
     this.renderTasks = new EventEmitter<any>();
   }
@@ -46,6 +46,7 @@ export class TaskComponent implements OnInit {
       .toPromise()
       .then(task => {
         console.log(task);
+        this.renderUserTasks.emit('test');
         this.renderTasks.emit();
         this.toggleTaskModal.emit();
       })

@@ -16,10 +16,11 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NewTaskComponent } from './components/modal/newtask/newtask.component';
 import { TaskComponent } from './components/modal/task/task.component';
 
-import { HomeService } from './services/home.service';
 import { AuthenticateService } from './services/authenticate.service';
 import { UserSerivce } from './services/user.service';
 import { TaskSerivce } from './services/task.service';
+import { GoogleMapService } from './services/google-map.service';
+import { GooglePlacesService } from './services/google-places.service';
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { AddTaskComponent } from './components/task/add-task/add-task.component';
@@ -69,7 +70,13 @@ import { UserTasksComponent } from './components/task/user-tasks/user-tasks.comp
     ),
     LayoutModule
   ],
-  providers: [HomeService, AuthenticateService, UserSerivce, TaskSerivce],
+  providers: [
+    AuthenticateService,
+    UserSerivce,
+    TaskSerivce,
+    GoogleMapService,
+    GooglePlacesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
