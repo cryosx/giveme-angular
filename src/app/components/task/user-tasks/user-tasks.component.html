@@ -6,20 +6,41 @@
 
 
 <div id="user_tasks_container">
-  <div *ngFor="let activeTask of tasks.activeTasks" class="user_tasks_item" [attr.data-task-id]="activeTask.id" (click)="leaveTask($event)">
+  <span class="task_section_label">Active Tasks</span>
+  <div id="activetasks_container">
+    <div *ngFor="let activeTask of tasks.activeTasks" class="user_tasks_item" [attr.data-task-id]="activeTask.id" (click)="leaveTask($event)">
 
-    <div class="task_expiration_container" [attr.data-task-id]="activeTask.id">
-      <span class="task_expiration_time" [attr.data-task-id]="activeTask.id">{{getExpiration(activeTask.expires_at)[0]}}</span>
-      <span class="task_expiration_units" [attr.data-task-id]="activeTask.id">{{getExpiration(activeTask.expires_at)[1]}} left</span>
+      <div class="task_expiration_container" [attr.data-task-id]="activeTask.id">
+        <span class="task_expiration_time" [attr.data-task-id]="activeTask.id">{{getExpiration(activeTask.expires_at)[0]}}</span>
+        <span class="task_expiration_units" [attr.data-task-id]="activeTask.id">{{getExpiration(activeTask.expires_at)[1]}} left</span>
+      </div>
+      <div class="seperator" [attr.data-task-id]="activeTask.id"></div>
+      <div class="task_details" [attr.data-task-id]="activeTask.id">
+        <span class="task_title" [attr.data-task-id]="activeTask.id">{{activeTask.title}}</span>
+        <span class="task_reward" [attr.data-task-id]="activeTask.id">{{activeTask.reward}}</span>
+      </div>
+      <div class="task_category_color" [attr.data-task-id]="activeTask.id"></div>
     </div>
-    <div class="seperator" [attr.data-task-id]="activeTask.id"></div>
-    <div class="task_details" [attr.data-task-id]="activeTask.id">
-      <span class="task_title" [attr.data-task-id]="activeTask.id">{{activeTask.title}}</span>
-      <span class="task_reward" [attr.data-task-id]="activeTask.id">{{activeTask.reward}}</span>
+  </div>
+  <span class="task_section_label">My Tasks</span>
+  <div *ngFor="let myTask of tasks.myTasks" class="user_tasks_item" [attr.data-task-id]="myTask.id" (click)="leaveTask($event)">
+
+    <div class="task_expiration_container" [attr.data-task-id]="myTask.id">
+      <span class="task_expiration_time" [attr.data-task-id]="myTask.id">{{getExpiration(myTask.expires_at)[0]}}</span>
+      <span class="task_expiration_units" [attr.data-task-id]="myTask.id">{{getExpiration(myTask.expires_at)[1]}} left</span>
     </div>
-    <div class="task_category_color" [attr.data-task-id]="activeTask.id"></div>
+    <div class="seperator" [attr.data-task-id]="myTask.id"></div>
+    <div class="task_details" [attr.data-task-id]="myTask.id">
+      <span class="task_title" [attr.data-task-id]="myTask.id">{{myTask.title}}</span>
+      <span class="task_reward" [attr.data-task-id]="myTask.id">{{myTask.reward}}</span>
+    </div>
+    <div class="task_category_color" [attr.data-task-id]="myTask.id"></div>
   </div>
 </div>
+
+
+
+
 
 <!-- {
   "id": 27,
