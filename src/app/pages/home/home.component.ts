@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import {
   trigger,
@@ -10,7 +9,7 @@ import {
 } from '@angular/animations';
 import * as moment from 'moment';
 
-import { HomeService } from '../../services/home.service';
+import { GoogleMapService } from '../../services/google-map.service';
 import { TaskSerivce } from '../../services/task.service';
 import { UserSerivce } from '../../services/user.service';
 
@@ -43,7 +42,7 @@ export class HomeComponent implements OnInit {
   showNewTaskModal: boolean;
 
   constructor(
-    private homeService: HomeService,
+    private googleMapService: GoogleMapService,
     private taskService: TaskSerivce,
     private userService: UserSerivce,
     private changeDetect: ChangeDetectorRef
@@ -56,18 +55,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    const mapOptions = {
-      center: new google.maps.LatLng(21.3086887, -157.8106461),
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      zoomControl: true,
-      mapTypeControl: false,
-      scaleControl: true,
-      streetViewControl: false,
-      rotateControl: false,
-      fullscreenControl: false
-    };
-    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapOptions);
+    this.googleMapService.setMapElement(this.gmapElement);
+
+    this.map = this.googleMapService.getMap();
 
     this.getTasks();
 
@@ -97,7 +87,6 @@ export class HomeComponent implements OnInit {
   }
 
   getTasks() {
-    console.log('GETTASK');
     this.taskService
       .getTasks()
       .toPromise()
@@ -141,8 +130,5 @@ export class HomeComponent implements OnInit {
     tasks.forEach(task => {
       task['marker'].setMap(null);
     });
-  }
-  log() {
-    console.log('click');
   }
 }
