@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, ChangeDetectorRef } from '@angular/core';
 import { TaskSerivce } from '../../../services/task.service';
 import { UserSerivce } from '../../../services/user.service';
+import { GoogleMapService } from '../../../services/google-map.service';
 
 import * as moment from 'moment';
 
@@ -18,6 +19,7 @@ export class UserTasksComponent implements OnInit {
   constructor(
     private taskService: TaskSerivce,
     private userService: UserSerivce,
+    private gmap: GoogleMapService,
     private changeDetector: ChangeDetectorRef
   ) {
     this.cookieUser = {};
@@ -88,5 +90,10 @@ export class UserTasksComponent implements OnInit {
   toggleTasksBar() {
     console.log('toggle test');
     this.showTasksBar = !this.showTasksBar;
+  }
+
+  goToTask() {
+    console.log('test');
+    this.gmap.getMap().panTo({ lat: 0, lng: 0 });
   }
 }
