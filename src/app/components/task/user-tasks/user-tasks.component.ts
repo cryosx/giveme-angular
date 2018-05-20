@@ -32,20 +32,34 @@ export class UserTasksComponent implements OnInit {
   }
 
   getUserTasks() {
-    console.log('tst');
+    console.log(`I'm running`);
     this.cookieUser = this.userService.getUser();
-    const id = this.cookieUser['id'];
-    this.taskService
-      .getUserTasks(id)
-      .toPromise()
-      .then(user => {
-        this.sessionUser = user;
-        this.tasks['myTasks'] = this.sessionUser['myTasks'];
-        this.tasks['activeTasks'] = this.sessionUser['activeTasks'];
-        this.changeDetector.detectChanges();
-        console.log(this.tasks);
-      })
-      .catch();
+    // console.log(this.cookieUser.user);
+    if (this.cookieUser) {
+      const id = this.cookieUser['id'];
+      console.log(this.cookieUser);
+      this.taskService
+        .getUserTasks(id)
+        .toPromise()
+        .then(user => {
+          this.sessionUser = user;
+
+          this.tasks['myTasks'] = this.sessionUser['myTasks'].sort(function(
+            task1,
+            task2
+          ) {
+            return moment(task1.expires_at).diff(moment(task2.expires_at));
+          });
+          this.tasks['activeTasks'] = this.sessionUser['activeTasks'].sort(
+            function(task1, task2) {
+              return moment(task1.expires_at).diff(moment(task2.expires_at));
+            }
+          );
+          this.changeDetector.detectChanges();
+          console.log(this.tasks);
+        })
+        .catch();
+    }
   }
   getExpiration(datetime) {
     const time = moment(datetime)

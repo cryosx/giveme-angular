@@ -7,11 +7,11 @@
 
 <div id="user_tasks_container" [ngClass]="{'show':showTasksBar, 'hide':!showTasksBar}">
 
-  <span class="task_section_label">Active Tasks</span>
+  <span *ngIf="tasks.activeTasks.length !== 0" class="task_section_label">Active Tasks</span>
 
   <div *ngIf="tasks.activeTasks.length !== 0" id="activetasks_container">
 
-    <div *ngFor="let activeTask of tasks.activeTasks" class="user_tasks_item" [attr.data-task-id]="activeTask.id" (click)="leaveTask($event)">
+    <div *ngFor="let activeTask of tasks.activeTasks" class="user_tasks_item" [attr.data-task-id]="activeTask.id">
 
       <div class="task_expiration_container" [attr.data-task-id]="activeTask.id">
         <span class="task_expiration_time" [attr.data-task-id]="activeTask.id">{{getExpiration(activeTask.expires_at)[0]}}</span>
@@ -22,7 +22,7 @@
         <span class="task_title" [attr.data-task-id]="activeTask.id">{{activeTask.title}}</span>
         <span class="task_reward" [attr.data-task-id]="activeTask.id">{{activeTask.reward}}</span>
       </div>
-      <div class="task_category_color" [attr.data-task-id]="activeTask.id"></div>
+      <div class="task_category_color" [attr.data-task-id]="activeTask.id" (click)="leaveTask($event)"></div>
     </div>
   </div>
   <span class="task_section_label">My Tasks</span>
