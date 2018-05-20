@@ -19,8 +19,6 @@ export class RegisterComponent {
   }
 
   register(event) {
-    console.log(event);
-    console.log(this.registerData);
     this.user.register(this.registerData);
     return this.router.navigateByUrl('/');
   }
