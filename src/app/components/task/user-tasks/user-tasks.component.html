@@ -4,9 +4,9 @@
   </li>
 </ul> -->
 
-<div id="tasksbar_button" (click)="toggleTasksBar();shiftTasksBarBtn();" [ngClass]="{'shiftBtn': moveTasksBarBtn, 'unshiftBtn': !moveTasksBarBtn}">myTasks</div>
+<div *ngIf="userService.getIsLoggedIn()" id="tasksbar_button" (click)="toggleTasksBar();shiftTasksBarBtn();" [ngClass]="{'shiftBtn': moveTasksBarBtn, 'unshiftBtn': !moveTasksBarBtn}">myTasks</div>
 
-<div id="user_tasks_container" [ngClass]="{'show':showTasksBar, 'hide':!showTasksBar}">
+<div *ngIf="userService.getIsLoggedIn()" id="user_tasks_container" [ngClass]="{'show_tasksbar':showTasksBar, 'hide_tasksbar':!showTasksBar}">
 
   <span *ngIf="tasks.activeTasks.length !== 0" class="task_section_label">Active Tasks</span>
 

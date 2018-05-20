@@ -24,7 +24,7 @@ export class SidebarComponent {
   logout() {
     this.user.logout();
     // this.router.navigateByUrl('/');
-    window.location.reload();
+    // window.location.reload();
   }
   toggleTasksBar() {
     this.showTasksBar.emit();

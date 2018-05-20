@@ -5,29 +5,34 @@
 #tasksbar_button {
   position: absolute;
   top: 32px;
+  right: 0px;
   background: white;
   padding: 8px 8px 4px 8px;
   border-radius: 6px;
 }
 
 .shiftBtn {
-  right: 432px;
-  transition: right 0.5s ease-in;
+  // right: 432px;
+  transform: translateX(-432px);
+  transition: transform 0.35s ease-in-out;
 }
 
 .unshiftBtn {
-  right: 32px;
-  transition: right 0.5s ease-out;
+  // right: 32px;
+  transform: translateX(-32px);
+  transition: transform 0.45s ease-in-out;
 }
 
-.hide {
-  right: -400px;
-  transition: right 0.5s ease-out;
+.hide_tasksbar {
+  // right: -400px;
+  transform: translateX(400px);
+  transition: transform 0.4s ease-in-out;
 }
 
-.show {
-  right: 0px;
-  transition: right 0.5s ease-in;
+.show_tasksbar {
+  // right: 0px;
+  transform: translateX(0px);
+  transition: transform 0.4s ease-in-out;
 }
 
 #user_tasks_container {
@@ -36,7 +41,8 @@
   width: 400px; // max-width: 400px;
   height: 100vh;
   position: absolute;
-  top: 0px; // right: -400px;
+  top: 0px;
+  right: 0px;
   background: white;
   overflow: scroll;
   margin-top: 0px;

@@ -1,0 +1,100 @@
+* {
+  font-family: 'Tajawal', sans-serif;
+}
+
+#register_back_button {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  z-index: 1;
+  img {
+    height: 42px; // width: 32px;
+  }
+}
+
+#register {
+  width: 100vw;
+  height: 100vh; // padding: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center; // background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+  background: linear-gradient(to right, #009fff, #ec2f4b);
+  #background_blur {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%; // filter: blur(1px);
+  }
+  #register_form_container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 450px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, .3);
+    z-index: 1;
+    background: white;
+    form {
+      // margin: 32px 0px 0px 0px;
+      // height: inherit;
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      margin: 32px;
+      * {
+        margin: 12px 0px;
+      }
+      input {
+        width: inherit;
+        height: 48px;
+        padding: 16px;
+        font-size: 12px;
+      }
+      input:focus {
+        outline: none;
+        border: none;
+        transition: all 0.3s ease-in-out;
+        box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.2);
+      }
+      #register_buttons {
+        display: flex;
+        justify-content: space-evenly;
+        button {
+          width: 100px;
+          height: 36px;
+          color: black;
+          background: white;
+          border-color: black;
+          border-radius: 4px;
+          font-size: 12px;
+        }
+        button:hover,
+        button:focus {
+          background: black;
+          color: white;
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+    #image_container {
+      display: grid;
+      grid-template-rows: 30% 70%;
+      grid-template-columns: 100%;
+      height: inherit;
+      width: 450px;
+      img {
+        height: inherit;
+        width: inherit;
+        grid-area: 1/1/2/1;
+      }
+      span {
+        grid-area: 1/1/1/1;
+        justify-self: center;
+        align-self: center;
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+    }
+  }
+}

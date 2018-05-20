@@ -1,3 +1,7 @@
+* {
+  font-family: 'Tajawal', sans-serif;
+}
+
 .hide {
   // left: -240px;
   transform: translateX(-240px);
@@ -22,9 +26,32 @@
   transition: transform 0.4s ease-in-out;
 }
 
+#login_button {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  width: 76px;
+  text-align: center;
+  padding: 10px 8px 4px 8px;
+  z-index: 1;
+  background: #FA4659;
+  color: white;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #00000030;
+}
+
+#login_button:hover,
+#login_button:focus {
+  transition: all 0.3s ease-in-out;
+  background: rgb(252, 19, 42);
+  font-weight: bold; // color: black;
+  // content: "Let's go!"
+}
+
 #sidebar_menu_button {
   position: absolute;
   top: 32px;
+  left: 32px;
   height: 36px;
   width: 36px;
   color: black;
@@ -34,7 +61,7 @@
 #sidebar {
   // will-change: position;
   position: absolute;
-  top: 0px;
+  top: 0px; // left: -240px;
   z-index: 1;
   background: white;
   height: 100vh;
@@ -43,6 +70,7 @@
   grid-template-rows: repeat(20, 5%);
   grid-template-columns: repeat(5, 20%);
   font-size: 1.5rem;
+  box-shadow: 0 0 10px #00000030;
   a {
     text-decoration: none;
     color: inherit;

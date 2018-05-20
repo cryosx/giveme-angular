@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  ChangeDetectorRef
+} from '@angular/core';
 import { TaskSerivce } from '../../../services/task.service';
 import { UserSerivce } from '../../../services/user.service';
 
@@ -16,10 +23,12 @@ export class TaskComponent implements OnInit {
   @Output() renderUserTasks: EventEmitter<any>;
   @Output() toggleTaskModal: EventEmitter<any>;
   @Output() renderTasks: EventEmitter<any>;
+  isParticipating: boolean;
 
   constructor(
     private taskService: TaskSerivce,
-    private userService: UserSerivce
+    private userService: UserSerivce,
+    private changeDetector: ChangeDetectorRef
   ) {
     this.taskData = {
       title: '',
@@ -31,6 +40,7 @@ export class TaskComponent implements OnInit {
     this.renderUserTasks = new EventEmitter<any>();
     this.toggleTaskModal = new EventEmitter<any>();
     this.renderTasks = new EventEmitter<any>();
+    this.isParticipating = false;
   }
 
   ngOnInit() {
@@ -44,24 +54,26 @@ export class TaskComponent implements OnInit {
     // dateInput.setAttribute('value', tomorrow);
   }
 
-  isParticipating() {
+  checkIsParticipating() {
     const user_id = this.userService.getUser().id;
     this.taskService
       .getTask(this.taskData['id'])
       .toPromise()
       .then(task => {
-        const test = task['participants'].find(user => {
+        this.isParticipating = task['participants'].some(user => {
           return user.id === user_id;
         });
-        console.log(test);
-        return test;
+        return this.changeDetector.detectChanges();
       })
-      .catch();
+      .catch(err => {
+        this.isParticipating = false;
+        // return this.changeDetector.detectChanges();
+      });
   }
 
   isOwner() {
-    console.log(this.userService.getUser().id);
-    console.log(this.taskData['owner_id']);
+    this.checkIsParticipating();
+
     return this.userService.getUser().id === this.taskData['owner_id'];
   }
 

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { UserSerivce } from './user.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class TaskSerivce {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private userService: UserSerivce) {}
 
   getUserTasks(id) {
     return this.http.get(`/api/user/${id}`);

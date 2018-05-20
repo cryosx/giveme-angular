@@ -16,6 +16,7 @@ import {
 import * as moment from 'moment';
 
 import { UserTasksComponent } from '../../components/task/user-tasks/user-tasks.component';
+import { TaskComponent } from '../../components/modal/task/task.component';
 
 import { GoogleMapService } from '../../services/google-map.service';
 import { UserSerivce } from '../../services/user.service';
@@ -30,6 +31,7 @@ import {} from '@types/googlemaps';
 export class HomeComponent implements OnInit {
   @ViewChild('gmap') gmapElement: any;
   @ViewChild(UserTasksComponent) private userTasksComponent: UserTasksComponent;
+  @ViewChild(TaskComponent) private taskComponent: TaskComponent;
 
   map: google.maps.Map;
   location: Object;
@@ -75,6 +77,8 @@ export class HomeComponent implements OnInit {
   toggleTaskModal() {
     this.showTaskModal = !this.showTaskModal;
     return this.changeDetect.detectChanges();
+    // this.taskComponent.checkIsParticipating();
+    // this.changeDetect.detectChanges();
   }
 
   getShowNewTaskModal() {

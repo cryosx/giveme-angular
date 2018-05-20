@@ -31,3 +31,5 @@
 <div id="sidebar_menu_button" (click)="toggleSideBar();shiftBtn();" [ngClass]="{'shiftBtn':moveBtn, 'unshiftBtn':!moveBtn}">
   <img src="/assets/menu-icon.svg" alt="menu-icon">
 </div>
+
+<div *ngIf="!isLoggedIn()" id="login_button" routerLink="login">Login</div>

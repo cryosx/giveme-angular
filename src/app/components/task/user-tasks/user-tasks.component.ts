@@ -98,8 +98,6 @@ export class UserTasksComponent implements OnInit {
 
   goToTask(event) {
     const { taskId, taskLat, taskLng } = event.target.dataset;
-    console.log(taskLat, taskLng);
-
     this.gmap.getMap().panTo(new google.maps.LatLng(taskLat, taskLng));
   }
 }
