@@ -19,8 +19,8 @@ import * as moment from 'moment';
 import { UserTasksComponent } from '../../components/task/user-tasks/user-tasks.component';
 
 import { GoogleMapService } from '../../services/google-map.service';
-import { TaskSerivce } from '../../services/task.service';
 import { UserSerivce } from '../../services/user.service';
+import { TaskSerivce } from '../../services/task.service';
 
 import {} from '@types/googlemaps';
 
@@ -53,9 +53,9 @@ export class HomeComponent implements OnInit {
   showTasksBar: boolean;
 
   constructor(
+    private userService: UserSerivce,
     private googleMapService: GoogleMapService,
     private taskService: TaskSerivce,
-    private userService: UserSerivce,
     private changeDetect: ChangeDetectorRef
   ) {
     this.tasks = {};
@@ -144,11 +144,9 @@ export class HomeComponent implements OnInit {
     });
   }
   renderUserTasks(event) {
-    console.log(event);
     this.userTask.getUserTasks();
   }
   toggleTasksBar(event) {
-    console.log(this);
     this.userTask.toggleTasksBar();
   }
 }
