@@ -10,17 +10,31 @@ import { UserSerivce } from '../../services/user.service';
 export class SidebarComponent {
   @Output() showTasksBar: EventEmitter<any>;
 
+  showSideBar: boolean;
+  moveBtn: boolean;
+
   isLoggedIn;
 
   constructor(private user: UserSerivce, private router: Router) {
     this.showTasksBar = new EventEmitter<any>();
     this.isLoggedIn = user.getIsLoggedIn;
+    this.showSideBar = false;
+    this.moveBtn = false;
   }
   logout() {
     this.user.logout();
-    this.router.navigateByUrl('/');
+    // this.router.navigateByUrl('/');
+    window.location.reload();
   }
   toggleTasksBar() {
     this.showTasksBar.emit();
+  }
+
+  toggleSideBar() {
+    this.showSideBar = !this.showSideBar;
+  }
+
+  shiftBtn() {
+    this.moveBtn = !this.moveBtn;
   }
 }

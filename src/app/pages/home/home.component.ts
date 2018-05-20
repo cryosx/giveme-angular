@@ -3,8 +3,7 @@ import {
   ViewChild,
   OnInit,
   ChangeDetectorRef,
-  Output,
-  EventEmitter
+  Output
 } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import {
@@ -26,22 +25,11 @@ import {} from '@types/googlemaps';
 
 @Component({
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  animations: [
-    trigger('slideInOut', [
-      transition(':enter', [
-        style({ transform: 'translateY(-100%)' }),
-        animate('200ms ease-in', style({ transform: 'translateY(0%)' }))
-      ]),
-      transition(':leave', [
-        animate('200ms ease-in', style({ transform: 'translateY(-100%)' }))
-      ])
-    ])
-  ]
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   @ViewChild('gmap') gmapElement: any;
-  @ViewChild(UserTasksComponent) private userTask: UserTasksComponent;
+  @ViewChild(UserTasksComponent) private userTasksComponent: UserTasksComponent;
 
   map: google.maps.Map;
   location: Object;
@@ -71,7 +59,7 @@ export class HomeComponent implements OnInit {
 
     this.map = this.googleMapService.getMap();
 
-    this.getTasks();
+    this.populateMap();
 
     this.map.addListener('click', event => {
       const { latLng } = event;
@@ -98,7 +86,7 @@ export class HomeComponent implements OnInit {
     return this.changeDetect.detectChanges();
   }
 
-  getTasks() {
+  populateMap() {
     this.taskService
       .getTasks()
       .toPromise()
@@ -143,10 +131,15 @@ export class HomeComponent implements OnInit {
       task['marker'].setMap(null);
     });
   }
+
+  getTasks() {
+    return this.tasks;
+  }
   renderUserTasks(event) {
-    this.userTask.getUserTasks();
+    this.userTasksComponent.getUserTasks();
   }
   toggleTasksBar(event) {
-    this.userTask.toggleTasksBar();
+    this.userTasksComponent.toggleTasksBar();
+    this.userTasksComponent.shiftTasksBarBtn();
   }
 }

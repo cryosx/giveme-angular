@@ -1,4 +1,42 @@
+.hide {
+  // left: -240px;
+  transform: translateX(-240px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.show {
+  // left: 0px;
+  transform: translateX(0px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.shiftBtn {
+  // left: 272px;
+  transform: translateX(272px);
+  transition: transform 0.25s ease-in-out;
+}
+
+.unshiftBtn {
+  // left: 32px;
+  transform: translateX(32px);
+  transition: transform 0.4s ease-in-out;
+}
+
+#sidebar_menu_button {
+  position: absolute;
+  top: 32px;
+  height: 36px;
+  width: 36px;
+  color: black;
+  z-index: 1;
+}
+
 #sidebar {
+  // will-change: position;
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+  background: white;
   height: 100vh;
   width: 240px;
   display: grid;

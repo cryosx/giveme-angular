@@ -8,6 +8,6 @@
     <input disabled type="date" name="expires" id="task_expires" placeholder="Expires: " [value]="taskData.expires_at">
     <textarea disabled name="description" id="task_description" placeholder="Description: " cols="30" rows="10" [(ngModel)]="taskData.description"></textarea>
     <input disabled type="text" name="reward" id="task_reward" placeholder="Reward: " [(ngModel)]="taskData.reward">
-    <button (click)="acceptTask()">Accept</button>
+    <button *ngIf="!isOwner() && !isParticipating()" (click)="acceptTask()">Accept</button>
   </form>
 </div>

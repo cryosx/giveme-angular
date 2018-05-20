@@ -40,3 +40,5 @@ Thumbs.db
 
 # API Keys
 .env
+
+src/index.html

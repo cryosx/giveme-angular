@@ -1,10 +1,10 @@
-<div id="sidebar">
+<div id="sidebar" [ngClass]="{'show':showSideBar, 'hide':!showSideBar}">
   <div id="sidebar_logo"></div>
   <a routerLink="/" routerLinkActive="active" id="sidebar_home">
     <img src="/assets/home-icon.svg" alt="home">
     <span>Home</span>
   </a>
-  <a id="sidebar_mytasks" (click)="showTasksBar.emit()">
+  <a *ngIf="isLoggedIn()" id="sidebar_mytasks" (click)="showTasksBar.emit();">
     <img src="/assets/task-icon.svg" alt="mytasks">
     <span>My Tasks</span>
   </a>
@@ -12,7 +12,7 @@
   <div class="seperator"></div>
 
   <div id="sidebar_auth">
-    <a *ngIf="isLoggedIn()" id="sidebar_logout" (click)="logout()">
+    <a *ngIf="isLoggedIn()" id="sidebar_logout" routerLink="/" (click)="logout()">
       <img src="/assets/logout-icon.svg" alt="logout">
       <span id="logout">Logout</span>
     </a>
@@ -26,4 +26,8 @@
     </a>
   </div>
 
+</div>
+
+<div id="sidebar_menu_button" (click)="toggleSideBar();shiftBtn();" [ngClass]="{'shiftBtn':moveBtn, 'unshiftBtn':!moveBtn}">
+  <img src="/assets/menu-icon.svg" alt="menu-icon">
 </div>

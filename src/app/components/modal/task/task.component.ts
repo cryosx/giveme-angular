@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { TaskSerivce } from '../../../services/task.service';
+import { UserSerivce } from '../../../services/user.service';
 
 import * as moment from 'moment';
 
@@ -16,7 +17,10 @@ export class TaskComponent implements OnInit {
   @Output() toggleTaskModal: EventEmitter<any>;
   @Output() renderTasks: EventEmitter<any>;
 
-  constructor(private taskService: TaskSerivce) {
+  constructor(
+    private taskService: TaskSerivce,
+    private userService: UserSerivce
+  ) {
     this.taskData = {
       title: '',
       description: '',
@@ -38,6 +42,27 @@ export class TaskComponent implements OnInit {
     // dateInput.setAttribute('min', now);
     // this.taskData['expires_at'] = tomorrow;
     // dateInput.setAttribute('value', tomorrow);
+  }
+
+  isParticipating() {
+    const user_id = this.userService.getUser().id;
+    this.taskService
+      .getTask(this.taskData['id'])
+      .toPromise()
+      .then(task => {
+        const test = task['participants'].find(user => {
+          return user.id === user_id;
+        });
+        console.log(test);
+        return test;
+      })
+      .catch();
+  }
+
+  isOwner() {
+    console.log(this.userService.getUser().id);
+    console.log(this.taskData['owner_id']);
+    return this.userService.getUser().id === this.taskData['owner_id'];
   }
 
   acceptTask() {

@@ -4,6 +4,7 @@
   </li>
 </ul> -->
 
+<div id="tasksbar_button" (click)="toggleTasksBar();shiftTasksBarBtn();" [ngClass]="{'shiftBtn': moveTasksBarBtn, 'unshiftBtn': !moveTasksBarBtn}">myTasks</div>
 
 <div id="user_tasks_container" [ngClass]="{'show':showTasksBar, 'hide':!showTasksBar}">
 
@@ -11,38 +12,41 @@
 
   <div *ngIf="tasks.activeTasks.length !== 0" id="activetasks_container">
 
-    <div *ngFor="let activeTask of tasks.activeTasks" class="user_tasks_item" [attr.data-task-id]="activeTask.id">
+    <div *ngFor="let activeTask of tasks.activeTasks" class="user_tasks_item" [attr.data-task-id]="activeTask.id" [attr.data-task-lat]="activeTask.location.lat"
+      [attr.data-task-lng]="activeTask.location.lng" (click)="goToTask($event)">
 
-      <div class="task_expiration_container" [attr.data-task-id]="activeTask.id">
-        <span class="task_expiration_time" [attr.data-task-id]="activeTask.id">{{getExpiration(activeTask.expires_at)[0]}}</span>
-        <span class="task_expiration_units" [attr.data-task-id]="activeTask.id">{{getExpiration(activeTask.expires_at)[1]}} left</span>
+      <div class="task_expiration_container" [attr.data-task-id]="activeTask.id" [attr.data-task-lat]="activeTask.location.lat"
+        [attr.data-task-lng]="activeTask.location.lng">
+        <span class="task_expiration_time" [attr.data-task-id]="activeTask.id" [attr.data-task-lat]="activeTask.location.lat" [attr.data-task-lng]="activeTask.location.lng">{{getExpiration(activeTask.expires_at)[0]}}</span>
+        <span class="task_expiration_units" [attr.data-task-id]="activeTask.id" [attr.data-task-lat]="activeTask.location.lat" [attr.data-task-lng]="activeTask.location.lng">{{getExpiration(activeTask.expires_at)[1]}} left</span>
       </div>
-      <div class="seperator" [attr.data-task-id]="activeTask.id"></div>
-      <div class="task_details" [attr.data-task-id]="activeTask.id">
-        <span class="task_title" [attr.data-task-id]="activeTask.id">{{activeTask.title}}</span>
-        <span class="task_reward" [attr.data-task-id]="activeTask.id">{{activeTask.reward}}</span>
+      <div class="seperator" [attr.data-task-id]="activeTask.id" [attr.data-task-lat]="activeTask.location.lat" [attr.data-task-lng]="activeTask.location.lng"></div>
+      <div class="task_details" [attr.data-task-id]="activeTask.id" [attr.data-task-lat]="activeTask.location.lat" [attr.data-task-lng]="activeTask.location.lng">
+        <span class="task_title" [attr.data-task-id]="activeTask.id" [attr.data-task-lat]="activeTask.location.lat" [attr.data-task-lng]="activeTask.location.lng">{{activeTask.title}}</span>
+        <span class="task_reward" [attr.data-task-id]="activeTask.id" [attr.data-task-lat]="activeTask.location.lat" [attr.data-task-lng]="activeTask.location.lng">{{activeTask.reward}}</span>
       </div>
-      <div class="task_category_color" [attr.data-task-id]="activeTask.id" (click)="leaveTask($event)"></div>
+      <div class="task_category_color" [attr.data-task-id]="activeTask.id" [attr.data-task-lat]="activeTask.location.lat" [attr.data-task-lng]="activeTask.location.lng"
+        (click)="leaveTask($event)"></div>
     </div>
   </div>
   <span class="task_section_label">My Tasks</span>
 
   <div *ngIf="tasks.myTasks.length !== 0" id="mytasks_container">
 
-    <div *ngFor="let myTask of tasks.myTasks" class="user_tasks_item" [attr.data-task-id]="myTask.id" (click)="leaveTask($event)">
-      <div class="task_expiration_container" [attr.data-task-id]="myTask.id">
-        <span class="task_expiration_time" [attr.data-task-id]="myTask.id">{{getExpiration(myTask.expires_at)[0]}}</span>
-        <span class="task_expiration_units" [attr.data-task-id]="myTask.id">{{getExpiration(myTask.expires_at)[1]}} left</span>
+    <div *ngFor="let myTask of tasks.myTasks" class="user_tasks_item" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat"
+      [attr.data-task-lng]="myTask.location.lng" (click)="goToTask($event)">
+      <div class="task_expiration_container" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat" [attr.data-task-lng]="myTask.location.lng">
+        <span class="task_expiration_time" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat" [attr.data-task-lng]="myTask.location.lng">{{getExpiration(myTask.expires_at)[0]}}</span>
+        <span class="task_expiration_units" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat" [attr.data-task-lng]="myTask.location.lng">{{getExpiration(myTask.expires_at)[1]}} left</span>
       </div>
-      <div class="seperator" [attr.data-task-id]="myTask.id"></div>
-      <div class="task_details" [attr.data-task-id]="myTask.id">
-        <span class="task_title" [attr.data-task-id]="myTask.id">{{myTask.title}}</span>
-        <span class="task_reward" [attr.data-task-id]="myTask.id">{{myTask.reward}}</span>
+      <div class="seperator" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat" [attr.data-task-lng]="myTask.location.lng"></div>
+      <div class="task_details" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat" [attr.data-task-lng]="myTask.location.lng">
+        <span class="task_title" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat" [attr.data-task-lng]="myTask.location.lng">{{myTask.title}}</span>
+        <span class="task_reward" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat" [attr.data-task-lng]="myTask.location.lng">{{myTask.reward}}</span>
       </div>
-      <div class="task_category_color" [attr.data-task-id]="myTask.id"></div>
+      <div class="task_category_color" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat" [attr.data-task-lng]="myTask.location.lng"></div>
     </div>
   </div>
-
 
 </div>
 

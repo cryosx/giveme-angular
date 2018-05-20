@@ -5,7 +5,7 @@
   <app-sidebar (showTasksBar)="toggleTasksBar()"></app-sidebar>
   <div #gmap id="gmap"></div>
   <app-user-tasks></app-user-tasks>
-
+  <!-- <span id="my_tasks_btn">My Tasks</span> -->
 </div>
 
 <app-newtask-modal *ngIf="getShowNewTaskModal() && userService.getIsLoggedIn()" (renderTasks)="getTasks()" (toggleNewTaskModal)="toggleNewTaskModal()"

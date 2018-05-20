@@ -15,6 +15,7 @@ export class UserTasksComponent implements OnInit {
   sessionUser: Object;
   tasks: Object;
   showTasksBar: boolean;
+  moveTasksBarBtn: boolean;
 
   constructor(
     private taskService: TaskSerivce,
@@ -25,6 +26,7 @@ export class UserTasksComponent implements OnInit {
     this.cookieUser = {};
     this.sessionUser = {};
     this.showTasksBar = false;
+    this.moveTasksBarBtn = false;
 
     this.tasks = { myTasks: [], activeTasks: [] };
   }
@@ -79,7 +81,6 @@ export class UserTasksComponent implements OnInit {
       .leaveTask(taskId)
       .toPromise()
       .then(data => {
-        console.log(data);
         this.getUserTasks();
       })
       .catch(err => {
@@ -88,12 +89,17 @@ export class UserTasksComponent implements OnInit {
   }
 
   toggleTasksBar() {
-    console.log('toggle test');
     this.showTasksBar = !this.showTasksBar;
   }
 
-  goToTask() {
-    console.log('test');
-    this.gmap.getMap().panTo({ lat: 0, lng: 0 });
+  shiftTasksBarBtn() {
+    this.moveTasksBarBtn = !this.moveTasksBarBtn;
+  }
+
+  goToTask(event) {
+    const { taskId, taskLat, taskLng } = event.target.dataset;
+    console.log(taskLat, taskLng);
+
+    this.gmap.getMap().panTo(new google.maps.LatLng(taskLat, taskLng));
   }
 }
