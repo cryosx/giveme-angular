@@ -8,14 +8,11 @@ import { Router } from '@angular/router';
 })
 export class UserSerivce implements CanActivate {
   isLoggedIn: boolean;
-  user: Object;
   constructor(
     private authService: AuthenticateService,
     private router: Router
   ) {
-    this.user = JSON.parse(localStorage.getItem('user'));
-    this.isLoggedIn = this.user ? true : false;
-    console.log(this.isLoggedIn);
+    this.isLoggedIn = localStorage.getItem('user') ? true : false;
   }
 
   register(data) {
@@ -23,7 +20,6 @@ export class UserSerivce implements CanActivate {
       .register(data)
       .toPromise()
       .then(user => {
-        console.log(user);
         localStorage.setItem('user', JSON.stringify(user));
         return (this.isLoggedIn = true);
       })
@@ -38,7 +34,6 @@ export class UserSerivce implements CanActivate {
       .login(data)
       .toPromise()
       .then(user => {
-        console.log(user);
         localStorage.setItem('user', JSON.stringify(user));
         return (this.isLoggedIn = true);
       })
@@ -63,11 +58,10 @@ export class UserSerivce implements CanActivate {
   }
 
   getUser() {
-    return this.user;
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   getIsLoggedIn = () => {
-    // console.log(this);
     return this.isLoggedIn;
   };
 
