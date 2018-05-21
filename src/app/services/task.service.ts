@@ -32,8 +32,11 @@ export class TaskSerivce {
     return this.http.get(`/api/task/${id}/leave`);
   }
 
-  complteTask(id) {
-    return this.http.get(`/api/task/${id}/complete`);
+  markTaskForCompletion(id) {
+    return this.http.get(`/api/task/${id}/mark-complete`);
+  }
+  confirmTaskForCompletion(id) {
+    return this.http.get(`/api/task/${id}/confirm-complete`);
   }
 
   //   leaveTask2(id) {
