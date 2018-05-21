@@ -38,10 +38,11 @@ export class UserTasksComponent implements OnInit {
   getUserTasks() {
     console.log(`I'm running`);
     this.cookieUser = this.userService.getUser();
-    // console.log(this.cookieUser.user);
+    console.log(this.cookieUser);
+
     if (this.cookieUser) {
       const id = this.cookieUser['id'];
-      console.log(this.cookieUser);
+      console.log(id);
       this.taskService
         .getUserTasks(id)
         .toPromise()
@@ -60,7 +61,6 @@ export class UserTasksComponent implements OnInit {
             }
           );
           this.changeDetector.detectChanges();
-          console.log(this.tasks);
         })
         .catch();
     }

@@ -61,9 +61,11 @@ export class TaskComponent implements OnInit {
       .getTask(this.taskData['id'])
       .toPromise()
       .then(task => {
-        this.isParticipating = task['participants'].some(function(user) {
+        return (this.isParticipating = task['participants'].some(function(
+          user
+        ) {
           return user.id === user_id;
-        });
+        }));
       })
       .catch(err => {
         this.isParticipating = false;
@@ -77,8 +79,9 @@ export class TaskComponent implements OnInit {
   }
 
   acceptTask() {
+    const task_id = this.taskData['id'];
     this.taskService
-      .acceptTask(this.taskData['id'])
+      .acceptTask(task_id)
       .toPromise()
       .then(task => {
         console.log(task);
@@ -89,5 +92,25 @@ export class TaskComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  markComplete() {
+    const task_id = this.taskData['id'];
+
+    this.taskService
+      .markTaskForCompletion(task_id)
+      .toPromise()
+      .then()
+      .catch();
+  }
+
+  confirmComplete() {
+    const task_id = this.taskData['id'];
+
+    this.taskService
+      .confirmTaskForCompletion(task_id)
+      .toPromise()
+      .then()
+      .catch();
   }
 }

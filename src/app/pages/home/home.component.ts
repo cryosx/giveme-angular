@@ -5,7 +5,8 @@ import {
   ApplicationRef,
   ChangeDetectorRef,
   ChangeDetectionStrategy,
-  Output
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import {
@@ -40,6 +41,7 @@ export class HomeComponent implements OnInit {
   tasks: Object;
   taskData: Object;
 
+  test: EventEmitter<any>;
   showTaskModal: boolean;
   showNewTaskModal: boolean;
   showTasksBar: boolean;
@@ -57,6 +59,7 @@ export class HomeComponent implements OnInit {
     this.showTaskModal = false;
     this.showNewTaskModal = false;
     this.showTasksBar = false;
+    this.test = new EventEmitter<any>();
   }
 
   ngOnInit() {
@@ -114,7 +117,7 @@ export class HomeComponent implements OnInit {
                 this.taskData['expires_at'] = moment(
                   this.taskData['expires_at']
                 ).format('YYYY-MM-DD');
-
+                this.test.emit();
                 this.toggleTaskModal();
               })
               .catch(err => {
@@ -146,5 +149,8 @@ export class HomeComponent implements OnInit {
   toggleTasksBar(event) {
     this.userTasksComponent.toggleTasksBar();
     this.userTasksComponent.shiftTasksBarBtn();
+  }
+  runTest() {
+    console.log('test');
   }
 }

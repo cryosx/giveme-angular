@@ -3,12 +3,12 @@
 </agm-map> -->
 <div id="home">
   <app-sidebar (showTasksBar)="toggleTasksBar()"></app-sidebar>
-  <div #gmap id="gmap"></div>
+  <div #gmap id="gmap" (test)="runTest()"></div>
   <app-user-tasks></app-user-tasks>
   <!-- <span id="my_tasks_btn">My Tasks</span> -->
 </div>
 
-<app-newtask-modal *ngIf="getShowNewTaskModal() && userService.getIsLoggedIn()" (input)="cdRef.detectChanges()" (renderTasks)="populateMap()"
+<app-newtask-modal *ngIf="getShowNewTaskModal() && userService.getIsLoggedIn()" (input)="cdRef.detectChanges()" (renderTasks)="getTasks()"
   (toggleNewTaskModal)="toggleNewTaskModal()" [location]="location">
   <!-- <form>
         <button (click)="toggleNewTaskModal.emit()">X</button>

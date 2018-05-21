@@ -9,6 +9,9 @@
     <textarea disabled name="description" id="task_description" placeholder="Description: " cols="30" rows="10" [(ngModel)]="taskData.description"></textarea>
     <input disabled type="text" name="reward" id="task_reward" placeholder="Reward: " [(ngModel)]="taskData.reward">
     <button *ngIf="!isOwner() && !isParticipating" (click)="acceptTask()">Accept</button>
+    <button *ngIf="false" (click)="markComplete()">Mark Complete</button>
+    <button *ngIf="false" (click)="confirmComplete()">Confirm Complete</button>
+
 
   </form>
 </div>

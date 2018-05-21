@@ -19,7 +19,10 @@ export class RegisterComponent {
   }
 
   register(event) {
-    this.user.register(this.registerData);
-    return this.router.navigateByUrl('/');
+    this.user.register(this.registerData).then(isLoggedIn => {
+      if (isLoggedIn) {
+        this.router.navigateByUrl('/');
+      }
+    });
   }
 }
