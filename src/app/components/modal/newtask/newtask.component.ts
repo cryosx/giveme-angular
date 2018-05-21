@@ -20,6 +20,7 @@ import { TaskSerivce } from '../../../services/task.service';
 import { Task } from '../../../models/Task';
 
 const moment = _moment;
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'YYYY-MM-DD'
@@ -28,6 +29,7 @@ export const MY_FORMATS = {
     dateInput: 'YYYY-MM-DD'
   }
 };
+
 @Component({
   selector: 'app-newtask-modal',
   templateUrl: './newtask.component.html',

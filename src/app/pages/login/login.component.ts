@@ -19,12 +19,10 @@ export class LoginComponent {
   }
 
   login(event) {
-    this.user.login(this.loginData).then(success => {
-      if (success) {
+    this.user.login(this.loginData).then(isLoggedIn => {
+      if (isLoggedIn) {
         return this.router.navigateByUrl('/');
       }
     });
-
-    // this.user.getIsLoggedIn();
   }
 }

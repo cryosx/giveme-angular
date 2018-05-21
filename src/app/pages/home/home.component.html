@@ -1,11 +1,7 @@
-<!-- <agm-map [(latitude)]="lat" [(longitude)]="lng" [(zoom)]="zoom" [(gestureHandling)]="gestureHandling" (styles)="styles" (centerChange)="onChooseLocation($event)">
-  <agm-marker [(latitude)]="lat" [(longitude)]="lng"></agm-marker>
-</agm-map> -->
 <div id="home">
   <app-sidebar (showTasksBar)="toggleTasksBar()"></app-sidebar>
   <div #gmap id="gmap" (test)="runTest()"></div>
   <app-user-tasks></app-user-tasks>
-  <!-- <span id="my_tasks_btn">My Tasks</span> -->
 </div>
 
 <app-newtask-modal *ngIf="getShowNewTaskModal() && userService.getIsLoggedIn()" (input)="cdRef.detectChanges()" (renderTasks)="getTasks()"
@@ -21,4 +17,3 @@
 </app-newtask-modal>
 <app-task-modal *ngIf="getShowTaskModal() && userService.getIsLoggedIn()" (input)="cdRef.detectChanges()" (renderUserTasks)="renderUserTasks($event)"
   (toggleTaskModal)="toggleTaskModal($event)" [taskData]='taskData'></app-task-modal>
-<!-- {{location | json}} -->

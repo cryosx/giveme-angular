@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  OnInit,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TaskSerivce } from '../../../services/task.service';
 import { UserSerivce } from '../../../services/user.service';
 
@@ -19,7 +11,7 @@ import {} from '../../services/task.service';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent {
   @Input() taskData: Object;
   @Output() renderUserTasks: EventEmitter<any>;
   @Output() toggleTaskModal: EventEmitter<any>;
@@ -28,8 +20,7 @@ export class TaskComponent implements OnInit {
 
   constructor(
     private taskService: TaskSerivce,
-    private userService: UserSerivce,
-    private changeDetector: ChangeDetectorRef
+    private userService: UserSerivce
   ) {
     this.taskData = {
       title: '',
@@ -42,17 +33,6 @@ export class TaskComponent implements OnInit {
     this.toggleTaskModal = new EventEmitter<any>();
     this.renderTasks = new EventEmitter<any>();
     this.isParticipating = false;
-  }
-
-  ngOnInit() {
-    // const dateInput = document.getElementById('new_task_expires');
-    // const now = moment().format('YYYY-MM-DD');
-    // const tomorrow = moment()
-    //   .add(1, 'day')
-    //   .format('YYYY-MM-DD');
-    // dateInput.setAttribute('min', now);
-    // this.taskData['expires_at'] = tomorrow;
-    // dateInput.setAttribute('value', tomorrow);
   }
 
   checkIsParticipating() {
@@ -69,7 +49,6 @@ export class TaskComponent implements OnInit {
       })
       .catch(err => {
         this.isParticipating = false;
-        // return this.changeDetector.detectChanges();
       });
   }
 
