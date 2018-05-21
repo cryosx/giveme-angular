@@ -4,7 +4,8 @@ import {
   Input,
   Output,
   OnInit,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { TaskSerivce } from '../../../services/task.service';
 import { UserSerivce } from '../../../services/user.service';
@@ -60,10 +61,9 @@ export class TaskComponent implements OnInit {
       .getTask(this.taskData['id'])
       .toPromise()
       .then(task => {
-        this.isParticipating = task['participants'].some(user => {
+        this.isParticipating = task['participants'].some(function(user) {
           return user.id === user_id;
         });
-        return this.changeDetector.detectChanges();
       })
       .catch(err => {
         this.isParticipating = false;
@@ -73,7 +73,6 @@ export class TaskComponent implements OnInit {
 
   isOwner() {
     this.checkIsParticipating();
-
     return this.userService.getUser().id === this.taskData['owner_id'];
   }
 
