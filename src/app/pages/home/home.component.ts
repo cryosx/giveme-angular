@@ -2,7 +2,9 @@ import {
   Component,
   ViewChild,
   OnInit,
+  ApplicationRef,
   ChangeDetectorRef,
+  ChangeDetectionStrategy,
   Output
 } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
@@ -46,7 +48,8 @@ export class HomeComponent implements OnInit {
     private userService: UserSerivce,
     private googleMapService: GoogleMapService,
     private taskService: TaskSerivce,
-    private changeDetect: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private appRef: ApplicationRef
   ) {
     this.tasks = {};
     this.location = { lat: 0, lng: 0 };
@@ -76,9 +79,7 @@ export class HomeComponent implements OnInit {
 
   toggleTaskModal() {
     this.showTaskModal = !this.showTaskModal;
-    return this.changeDetect.detectChanges();
-    // this.taskComponent.checkIsParticipating();
-    // this.changeDetect.detectChanges();
+    return this.cdRef.detectChanges();
   }
 
   getShowNewTaskModal() {
@@ -87,7 +88,7 @@ export class HomeComponent implements OnInit {
 
   toggleNewTaskModal() {
     this.showNewTaskModal = !this.showNewTaskModal;
-    return this.changeDetect.detectChanges();
+    return this.cdRef.detectChanges();
   }
 
   populateMap() {

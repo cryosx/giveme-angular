@@ -32,6 +32,10 @@ export class TaskSerivce {
     return this.http.get(`/api/task/${id}/leave`);
   }
 
+  complteTask(id) {
+    return this.http.get(`/api/task/${id}/complete`);
+  }
+
   //   leaveTask2(id) {
   //     return this.http.get(`/api/${user_id}/task/${id}/leave`);
   //   }

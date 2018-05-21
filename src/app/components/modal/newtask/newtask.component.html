@@ -1,14 +1,66 @@
-<div>
+<div id="new_task_form_container">
   <!-- <div id="newtask_background" (click)="toggleNewTaskModal.emit()"></div> -->
-  <div id="newtask_background"></div>
+  <div id="new_task_background"></div>
 
-  <form>
-    <button (click)="toggleNewTaskModal.emit()">X</button>
 
-    <input type="text" name="title" id="new_task_title" placeholder="Title: " [(ngModel)]="taskData.title">
+  <form (ngSubmit)="addTask()" #newTaskForm="ngForm" (mousemove)="cdRef.detectChanges()" (click)="cdRef.detectChanges()">
+    <h1>Create a new task
+      <button id="new_task_close" (click)="toggleNewTaskModal.emit()">Delete</button>
+
+    </h1>
+
+    <div class="form_input_container">
+      <mat-form-field>
+        <!-- <label id="new_task_title_label" for="new_task_title">Title</label> -->
+        <!-- <input type="text" class="form_control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel"> -->
+        <input matInput placeholder="Title" type="text" id="new_task_title" required [(ngModel)]="taskData.title" name="title" #title="ngModel">
+      </mat-form-field>
+      <div [hidden]="title.valid || title.pristine" class="alert alert_danger">
+        Title is required
+      </div>
+
+
+      <mat-form-field>
+        <!-- <input type="text" class="form_control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel"> -->
+        <!-- <input type="date" class="form_control" id="new_task_expires" required [(ngModel)]="taskData.expires_at" name="expires" #expires="ngModel"> -->
+        <textarea matInput placeholder="Description" name="description" class="form_control" id="new_task_description" required [(ngModel)]="taskData.description"
+          name="description" #description="ngModel"></textarea>
+      </mat-form-field>
+      <div [hidden]="description.valid || description.pristine" class="alert alert_danger">
+        Task description is required
+      </div>
+
+      <mat-form-field>
+        <!-- <input type="text" class="form_control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel"> -->
+        <!-- <input type="text" class="form_control" id="new_task_title" required [(ngModel)]="taskData.title" name="title" #title="ngModel"> -->
+        <input matInput [matDatepicker]="picker" placeholder="Expires" id="new_task_expires" required [(ngModel)]="taskData.expires_at"
+          name="expires" #expires="ngModel">
+        <!-- <input matInput [matDatepicker]="picker" placeholder="Choose a date"> -->
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div [hidden]="expires.valid || expires.pristine" class="alert alert_danger">
+        Expiration date is required
+      </div>
+
+      <mat-form-field>
+        <!-- <input type="text" class="form_control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel"> -->
+        <input matInput placeholder="Reward" value="0" type="number" class="form_control" id="new_task_reward" required [(ngModel)]="taskData.reward"
+          name="reward" #reward="ngModel">
+      </mat-form-field>
+      <div [hidden]="reward.valid || reward.pristine" class="alert alert_danger">
+        Reward is required
+      </div>
+
+      <button type="submit" [disabled]="!newTaskForm.form.valid">Add Task</button>
+
+    </div>
+
+    <!-- <input type="text" name="title" id="new_task_title" placeholder="Title: " [(ngModel)]="taskData.title">
     <input type="date" name="expires" id="new_task_expires" placeholder="Expires: " [value]="taskData.expires_at">
     <textarea name="description" id="new_task_description" placeholder="Description: " cols="30" rows="10" [(ngModel)]="taskData.description"></textarea>
     <input type="number" name="reward" id="new_task_reward" placeholder="Reward: " [(ngModel)]="taskData.reward">
-    <button (click)="addTask($event)">Submit</button>
+    <button type="submit" [disabled]="!newTaskForm.form.valid">Submit</button> -->
   </form>
+
 </div>

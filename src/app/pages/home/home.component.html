@@ -8,17 +8,17 @@
   <!-- <span id="my_tasks_btn">My Tasks</span> -->
 </div>
 
-<app-newtask-modal *ngIf="getShowNewTaskModal() && userService.getIsLoggedIn()" (renderTasks)="getTasks()" (toggleNewTaskModal)="toggleNewTaskModal()"
-  [location]="location">
+<app-newtask-modal *ngIf="getShowNewTaskModal() && userService.getIsLoggedIn()" (input)="cdRef.detectChanges()" (renderTasks)="populateMap()"
+  (toggleNewTaskModal)="toggleNewTaskModal()" [location]="location">
   <!-- <form>
-      <button (click)="toggleNewTaskModal.emit()">X</button>
-      <input type="text" name="title" id="new_task_title" placeholder="Title: " [(ngModel)]="taskData.title">
-      <input type="date" name="expires" id="new_task_expires" placeholder="Expires: " [value]="taskData.expires_at">
-      <textarea name="description" id="new_task_description" placeholder="Description: " cols="30" rows="10" [(ngModel)]="taskData.description"></textarea>
-      <input type="number" name="reward" id="new_task_reward" placeholder="Reward: " [(ngModel)]="taskData.reward">
-      <button (click)="addTask($event)">Submit</button>
-    </form> -->
+        <button (click)="toggleNewTaskModal.emit()">X</button>
+        <input type="text" name="title" id="new_task_title" placeholder="Title: " [(ngModel)]="taskData.title">
+        <input type="date" name="expires" id="new_task_expires" placeholder="Expires: " [value]="taskData.expires_at">
+        <textarea name="description" id="new_task_description" placeholder="Description: " cols="30" rows="10" [(ngModel)]="taskData.description"></textarea>
+        <input type="number" name="reward" id="new_task_reward" placeholder="Reward: " [(ngModel)]="taskData.reward">
+        <button (click)="addTask($event)">Submit</button>
+      </form> -->
 </app-newtask-modal>
-<app-task-modal *ngIf="getShowTaskModal() && userService.getIsLoggedIn()" (renderUserTasks)="renderUserTasks($event)" (toggleTaskModal)="toggleTaskModal($event)"
-  [taskData]='taskData'></app-task-modal>
+<app-task-modal *ngIf="getShowTaskModal() && userService.getIsLoggedIn()" (input)="cdRef.detectChanges()" (renderUserTasks)="renderUserTasks($event)"
+  (toggleTaskModal)="toggleTaskModal($event)" [taskData]='taskData'></app-task-modal>
 <!-- {{location | json}} -->
