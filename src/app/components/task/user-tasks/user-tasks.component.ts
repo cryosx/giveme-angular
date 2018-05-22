@@ -36,13 +36,10 @@ export class UserTasksComponent implements OnInit {
   }
 
   getUserTasks() {
-    console.log(`I'm running`);
     this.cookieUser = this.userService.getUser();
-    console.log(this.cookieUser);
 
     if (this.cookieUser) {
       const id = this.cookieUser['id'];
-      console.log(id);
       this.taskService
         .getUserTasks(id)
         .toPromise()
@@ -96,7 +93,8 @@ export class UserTasksComponent implements OnInit {
     this.moveTasksBarBtn = !this.moveTasksBarBtn;
   }
 
-  goToTask(event) {
+  goToTask(event, activeTask) {
+    console.log(activeTask);
     const { taskId, taskLat, taskLng } = event.target.dataset;
     this.gmap.getMap().panTo(new google.maps.LatLng(taskLat, taskLng));
   }

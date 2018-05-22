@@ -50,10 +50,11 @@ export class TaskComponent {
       .catch(err => {
         this.isParticipating = false;
       });
+    return this.isParticipating;
   }
 
   isOwner() {
-    this.checkIsParticipating();
+    // this.checkIsParticipating();
     return this.userService.getUser().id === this.taskData['owner_id'];
   }
 

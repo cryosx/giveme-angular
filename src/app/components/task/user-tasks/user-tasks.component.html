@@ -7,7 +7,7 @@
   <div *ngIf="tasks.activeTasks.length !== 0" id="activetasks_container">
 
     <div *ngFor="let activeTask of tasks.activeTasks" class="user_tasks_item" [attr.data-task-id]="activeTask.id" [attr.data-task-lat]="activeTask.location.lat"
-      [attr.data-task-lng]="activeTask.location.lng" (click)="goToTask($event)">
+      [attr.data-task-lng]="activeTask.location.lng" (click)="goToTask($event, activeTask)">
 
       <div class="task_expiration_container" [attr.data-task-id]="activeTask.id" [attr.data-task-lat]="activeTask.location.lat"
         [attr.data-task-lng]="activeTask.location.lng">
@@ -28,7 +28,7 @@
   <div *ngIf="tasks.myTasks.length !== 0" id="mytasks_container">
 
     <div *ngFor="let myTask of tasks.myTasks" class="user_tasks_item" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat"
-      [attr.data-task-lng]="myTask.location.lng" (click)="goToTask($event)">
+      [attr.data-task-lng]="myTask.location.lng" (click)="goToTask($event, myTask)">
       <div class="task_expiration_container" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat" [attr.data-task-lng]="myTask.location.lng">
         <span class="task_expiration_time" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat" [attr.data-task-lng]="myTask.location.lng">{{getExpiration(myTask.expires_at)[0]}}</span>
         <span class="task_expiration_units" [attr.data-task-id]="myTask.id" [attr.data-task-lat]="myTask.location.lat" [attr.data-task-lng]="myTask.location.lng">{{getExpiration(myTask.expires_at)[1]}} left</span>

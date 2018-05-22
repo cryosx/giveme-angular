@@ -4,7 +4,6 @@ import {
   OnInit,
   ApplicationRef,
   ChangeDetectorRef,
-  ChangeDetectionStrategy,
   Output,
   EventEmitter
 } from '@angular/core';
